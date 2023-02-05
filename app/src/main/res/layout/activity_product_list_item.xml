@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:focusable="true"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/productImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <Button
+        android:id="@+id/viewButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/blackGradientImageView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/black_gradient"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/lastPurchaseTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Purchase"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView"
+        android:layout_marginBottom="60dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginStart="10dp"
+        />
+
+    <TextView
+        android:id="@+id/priceLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView"
+        android:layout_marginBottom="35dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:layout_marginStart="10dp"
+        />
+
+    <TextView
+        android:id="@+id/priceValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="357.50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView"
+        android:layout_marginBottom="35dp"
+        android:layout_marginStart="50dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        />
+
+
+    <TextView
+        android:id="@+id/locationLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:layout_marginStart="10dp"
+        />
+
+    <TextView
+        android:id="@+id/locationValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Safeer Market"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="72dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

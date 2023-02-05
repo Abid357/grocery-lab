@@ -52,7 +52,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
 
         animation.addEndListener((animation1, canceled, value, velocity) -> {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
             startActivity(intent);
             finish();
         });
