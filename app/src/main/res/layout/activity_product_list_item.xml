@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="250dp"
+    android:layout_margin="7px"
     android:focusable="true"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/productImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
     <Button
         android:id="@+id/viewButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:text="View"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -27,73 +27,136 @@
         android:id="@+id/blackGradientImageView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:srcCompat="@drawable/black_gradient"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/black_gradient" />
 
     <TextView
         android:id="@+id/lastPurchaseTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Last Purchase"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/blackGradientImageView"
+        android:layout_marginStart="150dp"
         android:layout_marginBottom="60dp"
+        android:text="Last Purchase"
         android:textColor="@color/white"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView" />
+
+    <TextView
+        android:id="@+id/productTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        />
+        android:layout_marginBottom="60dp"
+        android:text="Product"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView" />
 
     <TextView
         android:id="@+id/priceLabelTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/blackGradientImageView"
+        android:layout_marginStart="150dp"
         android:layout_marginBottom="35dp"
+        android:text="Price"
         android:textColor="@color/white"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView" />
+
+    <TextView
+        android:id="@+id/brandLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        />
+        android:layout_marginBottom="35dp"
+        android:text="Brand"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView" />
 
     <TextView
         android:id="@+id/priceValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="357.50"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/blackGradientImageView"
+        android:layout_marginStart="190dp"
         android:layout_marginBottom="35dp"
-        android:layout_marginStart="50dp"
+        android:text="-"
         android:textColor="@color/white"
         android:textSize="14sp"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView" />
 
+    <TextView
+        android:id="@+id/brandValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="35dp"
+        android:ellipsize="end"
+        android:maxWidth="90dp"
+        android:maxLines="1"
+        android:text="-"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView" />
 
     <TextView
         android:id="@+id/locationLabelTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Location"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/blackGradientImageView"
+        android:layout_marginStart="150dp"
         android:layout_marginBottom="15dp"
+        android:text="Location"
         android:textColor="@color/white"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView" />
+
+
+    <TextView
+        android:id="@+id/typeLabelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        />
+        android:layout_marginBottom="15dp"
+        android:text="Type"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView" />
 
     <TextView
         android:id="@+id/locationValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Safeer Market"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/blackGradientImageView"
+        android:layout_marginStart="213dp"
         android:layout_marginBottom="15dp"
-        android:layout_marginStart="72dp"
+        android:ellipsize="end"
+        android:maxWidth="85dp"
+        android:maxLines="1"
+        android:text="-"
         android:textColor="@color/white"
         android:textSize="14sp"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView" />
 
+    <TextView
+        android:id="@+id/typeValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="15dp"
+        android:ellipsize="end"
+        android:maxWidth="97dp"
+        android:maxLines="1"
+        android:text="-"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/blackGradientImageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

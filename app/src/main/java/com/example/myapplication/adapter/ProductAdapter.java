@@ -32,8 +32,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(ProductAdapter.ProductViewHolder holder, int position) {
-        holder.priceValueTextView.setText(Double.toString(products.get(position).getLastPurchasePrice()));
-        holder.locationValueTextView.setText(products.get(position).getLastPurchaseLocation());
+        holder.priceValue.setText(Double.toString(products.get(position).getLastPurchasePrice()));
+        holder.locationValue.setText(products.get(position).getLastPurchaseLocation());
+        holder.brandValue.setText(products.get(position).getBrandName());
+        holder.typeValue.setText(products.get(position).getProductType());
     }
 
     @Override
@@ -42,14 +44,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
-        ImageView productImageView;
-        TextView priceValueTextView, locationValueTextView;
+        ImageView productImage;
+        TextView priceValue, locationValue, brandValue, typeValue;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
-            productImageView = itemView.findViewById(R.id.productImageView);
-            priceValueTextView = itemView.findViewById(R.id.priceValueTextView);
-            locationValueTextView = itemView.findViewById(R.id.locationValueTextView);
+            productImage = itemView.findViewById(R.id.productImageView);
+            priceValue = itemView.findViewById(R.id.priceValueTextView);
+            locationValue = itemView.findViewById(R.id.locationValueTextView);
+            brandValue = itemView.findViewById(R.id.brandValueTextView);
+            typeValue = itemView.findViewById(R.id.typeValueTextView);
         }
     }
 }

@@ -7,6 +7,8 @@ import androidx.dynamicanimation.animation.SpringForce;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.myapplication.MainActivity;
@@ -23,18 +25,35 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         ImageView view = findViewById(R.id.titleImageView);
 
-        // create an animation for your view and set the property you want to animate
-        SpringAnimation animation = new SpringAnimation(view, SpringAnimation.X);
-        // create a spring with desired parameters
-        SpringForce spring = new SpringForce();
-        // can also be passed directly in the constructor
-        spring.setFinalPosition(0f);
-        // optional, default is STIFFNESS_MEDIUM
-        spring.setStiffness(SpringForce.STIFFNESS_LOW);
-        // optional, default is DAMPING_RATIO_MEDIUM_BOUNCY
-        spring.setDampingRatio(SpringForce.DAMPING_RATIO_HIGH_BOUNCY);
-        // set your animation's spring
-        animation.setSpring(spring);
+        Animation slideAnimation = AnimationUtils.loadAnimation(this, R.anim.side_slide);
+        slideAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                SpringAnimation jerkAnimation = new SpringAnimation(view, SpringAnimation.X);
+                SpringForce spring = new SpringForce();
+                spring.setFinalPosition(430);
+                spring.setStiffness(SpringForce.STIFFNESS_LOW);
+                spring.setDampingRatio(SpringForce.DAMPING_RATIO_HIGH_BOUNCY);
+                jerkAnimation.setSpring(spring);
+                jerkAnimation.addEndListener((animation1, canceled, value, velocity) -> {
+                    Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
+                    startActivity(intent);
+                    finish();
+                });
+                jerkAnimation.animateToFinalPosition(400);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        view.startAnimation(slideAnimation);
 
         try {
             new AsyncTask<Void, Void, Void>() {
@@ -50,13 +69,5 @@ public class SplashScreenActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        animation.addEndListener((animation1, canceled, value, velocity) -> {
-            Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
-            startActivity(intent);
-            finish();
-        });
-
-        animation.start();
     }
 }

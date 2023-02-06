@@ -20,11 +20,12 @@
 
     <ImageView
         android:id="@+id/titleImageView"
-        android:layout_width="match_parent"
-        android:layout_height="100sp"
-        android:layout_marginTop="650dp"
-        android:src="@drawable/cart"
-        android:translationX="-150sp"
-        android:translationY="-230sp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/titleImageView"
+        android:layout_centerInParent="true"
+        android:paddingTop="130dp"
+        android:src="@drawable/cart_resized"
+       />
 
 </RelativeLayout>
