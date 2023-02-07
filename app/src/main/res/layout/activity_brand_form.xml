@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ProductFormActivity">
+    tools:context=".activity.BrandFormActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/productFormLayout">
 
         <LinearLayout
@@ -21,18 +21,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:background="@color/cardview_dark_background"
-                android:src="@drawable/baseline_image_24" />
+                android:src="@drawable/baseline_image_24"
+                android:layout_marginBottom="30dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
-                android:hint="Product Type"
+                android:hint="Product"
                 app:startIconDrawable="@drawable/baseline_filter_list_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/productTypeEditText"
+                    android:id="@+id/brandProductEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
@@ -44,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:hint="Brand Name"
-                app:startIconDrawable="@drawable/product_resized">
+                app:startIconDrawable="@drawable/brand_resized">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/brandNameEditText"
@@ -61,11 +62,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:src="@drawable/baseline_camera_enhance_24"
-        android:tint="@color/white"
-        app:backgroundTint="@color/design_default_color_primary_dark"
+        app:backgroundTint="@color/splashScreen"
         app:layout_anchor="@id/productImageView"
         app:layout_anchorGravity="bottom|end"
-        android:contentDescription="Add product image"/>
+        android:contentDescription="Add brand image"
+        app:tint="@null"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/saveProductButton"
@@ -75,7 +76,8 @@
         android:src="@drawable/baseline_check_24"
         app:layout_anchor="@id/productFormLayout"
         app:layout_anchorGravity="bottom|end"
-        android:contentDescription="Save product"
+        android:contentDescription="Save brand"
+        app:tint="@null"
         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

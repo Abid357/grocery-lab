@@ -1,35 +1,35 @@
 package com.example.myapplication.core;
 
-public class Product {
-    public static final String PRODUCT_TAG = "products";
+public class Brand {
+    public static final String BRAND_TAG = "brands";
     public static final int INSERT = 1;
     public static final int EDIT = 2;
     public static final int DELETE = 3;
-    private String brandName;
-    private String productType;
+    private String name;
+    private String product;
     private String imagePath;
     private double lastPurchasePrice;
     private String lastPurchaseLocation;
 
-    public Product(String brandName, String productType) {
-        this.brandName = brandName;
-        this.productType = productType;
+    public Brand(String name, String product) {
+        this.name = name;
+        this.product = product;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getName() {
+        return name;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getProductType() {
-        return productType;
+    public String getProduct() {
+        return product;
     }
 
-    public void setProductType(String productType) {
-        this.productType = productType;
+    public void setProduct(String product) {
+        this.product = product;
     }
 
     public String getImagePath() {

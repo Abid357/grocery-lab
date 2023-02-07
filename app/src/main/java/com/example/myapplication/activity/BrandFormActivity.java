@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.core.Product;
+import com.example.myapplication.core.Brand;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
@@ -19,8 +17,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ProductFormActivity extends AppCompatActivity {
-    private TextInputEditText productTypeText, brandNameText;
+public class BrandFormActivity extends AppCompatActivity {
+    private TextInputEditText brandProductText, brandNameText;
     private FloatingActionButton productImageButton, saveButton;
     private ImageView productImageView;
     private SharedPreferences sp;
@@ -28,20 +26,20 @@ public class ProductFormActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_form);
+        setContentView(R.layout.activity_brand_form);
 
-        productTypeText = findViewById(R.id.productTypeEditText);
+        brandProductText = findViewById(R.id.brandProductEditText);
         brandNameText = findViewById(R.id.brandNameEditText);
         productImageButton = findViewById(R.id.addProductImageButton);
         productImageView = findViewById(R.id.productImageView);
         saveButton = findViewById(R.id.saveProductButton);
         saveButton.setOnClickListener(view -> {
-            String productType = productTypeText.getText().toString();
-            String brandName = brandNameText.getText().toString();
-            Product product = new Product(brandName, productType);
+            String brandProduct = brandProductText.getText().toString().trim();
+            String brandName = brandNameText.getText().toString().trim();
+            Brand brand = new Brand(brandName, brandProduct);
 
             sp = getSharedPreferences("grocerylab", MODE_PRIVATE);
-            String jsonData = sp.getString(Product.PRODUCT_TAG, "");
+            String jsonData = sp.getString(Brand.BRAND_TAG, "");
 
             JSONArray jsonArray = new JSONArray();
             try {
@@ -49,18 +47,18 @@ public class ProductFormActivity extends AppCompatActivity {
                     jsonArray = new JSONArray(jsonData);
                 }
                 Gson gson = new Gson();
-                jsonArray.put(new JSONObject(gson.toJson(product)));
+                jsonArray.put(new JSONObject(gson.toJson(brand)));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
             SharedPreferences.Editor editor = sp.edit();
-            editor.putString(Product.PRODUCT_TAG, jsonArray.toString());
+            editor.putString(Brand.BRAND_TAG, jsonArray.toString());
             editor.apply();
 
-            Intent intent = new Intent(this, ProductListActivity.class);
+            Intent intent = new Intent(this, BrandListActivity.class);
             startActivity(intent);
-            finishActivity(Product.INSERT);
+            finishActivity(Brand.INSERT);
             finish();
         });
     }
