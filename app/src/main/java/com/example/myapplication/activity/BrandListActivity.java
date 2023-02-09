@@ -30,10 +30,10 @@ public class BrandListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_brand_list);
-        RecyclerView recyclerView = findViewById(R.id.productRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.brandRecyclerView);
         FloatingActionButton addBrandButton = findViewById(R.id.addBrandButton);
 
-        loadProductList();
+        loadBrandList();
         adapter = new BrandAdapter(this, brandList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -54,7 +54,7 @@ public class BrandListActivity extends AppCompatActivity {
         });
     }
 
-    void loadProductList() {
+    void loadBrandList() {
         brandList = new ArrayList<>();
         SharedPreferences sp = getSharedPreferences("grocerylab", MODE_PRIVATE);
         String jsonData = sp.getString(Brand.BRAND_TAG, "");
