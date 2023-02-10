@@ -19,17 +19,22 @@
             android:maxLines="1"
             android:text="Line 1"
             android:textColor="@color/black"
-            android:textSize="20sp" />
-<!--TODO: center align the delete button-->
+            android:textSize="20sp"
+            android:layout_centerVertical="true"/>
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/deleteProductButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            app:iconSize="20dp"
-            app:iconPadding="0dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
             app:icon="@drawable/baseline_delete_24"
-            app:tint="@null"
-             />
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"
+            android:contentDescription="Delete product"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/deleteButton"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -5,7 +5,6 @@ import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.dynamicanimation.animation.SpringForce;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -13,7 +12,6 @@ import android.widget.ImageView;
 
 import com.example.myapplication.R;
 
-import java.util.concurrent.ExecutionException;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -54,19 +52,19 @@ public class SplashScreenActivity extends AppCompatActivity {
         });
         view.startAnimation(slideAnimation);
 
-        try {
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(Void... voids) {
-//                    new Global(getApplicationContext());
-//                    Global.loadDatabase();
-                    return null;
-                }
-            }.execute().get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            new AsyncTask<Void, Void, Void>() {
+//                @Override
+//                protected Void doInBackground(Void... voids) {
+////                    new Global(getApplicationContext());
+////                    Global.loadDatabase();
+//                    return null;
+//                }
+//            }.execute().get();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 }
