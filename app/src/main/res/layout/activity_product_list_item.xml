@@ -25,6 +25,7 @@
         <com.google.android.material.button.MaterialButton
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:id="@+id/deleteProductButton"
             android:insetLeft="0dp"
             android:insetTop="0dp"
             android:insetRight="0dp"
