@@ -1,7 +1,6 @@
 package com.example.myapplication.core;
 
 public class Product {
-    public static final String PRODUCT_TAG = "products";
     private String name;
 
     public Product(String name) {
@@ -10,10 +9,6 @@ public class Product {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

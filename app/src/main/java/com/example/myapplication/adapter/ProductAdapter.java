@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.core.Database;
 import com.example.myapplication.core.Product;
 import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
@@ -42,20 +43,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productName.setText(productList.get(holder.getAdapterPosition()).getName());
         SharedPreferences sp = context.getSharedPreferences("grocerylab", Context.MODE_PRIVATE);
         holder.deleteProductButton.setOnClickListener(v -> {
-            productList.remove(holder.getAdapterPosition());
+            Database.withContext(context).deleteProduct(holder.getAdapterPosition());
             notifyItemRemoved(holder.getAdapterPosition());
-            try {
-                JSONArray jsonArray = new JSONArray();
-                Gson gson = new Gson();
-                for (Product p : productList)
-                    jsonArray.put(new JSONObject(gson.toJson(p)));
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putString(Product.PRODUCT_TAG, jsonArray.toString());
-                editor.apply();
-                Toast.makeText(context, "Product deleted.", Toast.LENGTH_SHORT).show();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -66,7 +55,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView productName;
-
         MaterialButton deleteProductButton;
 
         public ProductViewHolder(View itemView) {

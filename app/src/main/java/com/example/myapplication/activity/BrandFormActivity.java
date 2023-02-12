@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.core.Brand;
 import com.example.myapplication.core.Database;
@@ -48,28 +49,12 @@ public class BrandFormActivity extends AppCompatActivity {
             String brandProduct = brandProductAutoComplete.getEditableText().toString();
             String brandName = brandNameText.getText().toString().trim();
             Brand brand = new Brand(brandName, brandProduct);
+            Database.withContext(this).addBrand(brand);
 
-            sp = getSharedPreferences("grocerylab", MODE_PRIVATE);
-            String jsonData = sp.getString(Brand.BRAND_TAG, "");
-
-            JSONArray jsonArray = new JSONArray();
-            try {
-                if (!jsonData.isEmpty()) {
-                    jsonArray = new JSONArray(jsonData);
-                }
-                Gson gson = new Gson();
-                jsonArray.put(new JSONObject(gson.toJson(brand)));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putString(Brand.BRAND_TAG, jsonArray.toString());
-            editor.apply();
-
-            Intent intent = new Intent(this, BrandListActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("fragment", R.id.brandsMenu);
             startActivity(intent);
-            finishActivity(Brand.INSERT);
+            finishActivity(Database.INSERT);
             finish();
         });
     }

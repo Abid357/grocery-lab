@@ -1,10 +1,6 @@
 package com.example.myapplication.core;
 
 public class Brand {
-    public static final String BRAND_TAG = "brands";
-    public static final int INSERT = 1;
-    public static final int EDIT = 2;
-    public static final int DELETE = 3;
     private String name;
     private String product;
     private String imagePath;
@@ -20,16 +16,8 @@ public class Brand {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getProduct() {
         return product;
-    }
-
-    public void setProduct(String product) {
-        this.product = product;
     }
 
     public String getImagePath() {

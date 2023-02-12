@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 
 
@@ -38,7 +39,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 spring.setDampingRatio(SpringForce.DAMPING_RATIO_HIGH_BOUNCY);
                 jerkAnimation.setSpring(spring);
                 jerkAnimation.addEndListener((animation1, canceled, value, velocity) -> {
-                    Intent intent = new Intent(getApplicationContext(), BrandListActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
                 });

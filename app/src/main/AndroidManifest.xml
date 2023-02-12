@@ -15,14 +15,6 @@
             android:name=".activity.BrandFormActivity"
             android:label="Brand" />
         <activity
-            android:name=".activity.BrandListActivity"
-            android:label="Brands"
-            />
-        <activity
-            android:name=".activity.ProductListActivity"
-            android:label="Products"
-            />
-        <activity
             android:name=".activity.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
