@@ -30,7 +30,6 @@ public class ProductListActivity extends AppCompatActivity {
     private ProductAdapter adapter;
     private List<Product> productList;
 
-    private Stack<Product> products;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +68,7 @@ public class ProductListActivity extends AppCompatActivity {
         });
     }
 
-    void loadProducts() {
+    List<Product> loadProducts() {
         productList = new ArrayList<>();
         SharedPreferences sp = getSharedPreferences("grocerylab", MODE_PRIVATE);
         String jsonData = sp.getString(Product.PRODUCT_TAG, "");
@@ -79,5 +78,6 @@ public class ProductListActivity extends AppCompatActivity {
             }.getType();
             productList = gson.fromJson(jsonData, type);
         }
+        return productList;
     }
 }

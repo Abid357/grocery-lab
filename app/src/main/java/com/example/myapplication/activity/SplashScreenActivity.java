@@ -38,7 +38,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 spring.setDampingRatio(SpringForce.DAMPING_RATIO_HIGH_BOUNCY);
                 jerkAnimation.setSpring(spring);
                 jerkAnimation.addEndListener((animation1, canceled, value, velocity) -> {
-                    Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), BrandListActivity.class);
                     startActivity(intent);
                     finish();
                 });
@@ -51,20 +51,5 @@ public class SplashScreenActivity extends AppCompatActivity {
             }
         });
         view.startAnimation(slideAnimation);
-
-//        try {
-//            new AsyncTask<Void, Void, Void>() {
-//                @Override
-//                protected Void doInBackground(Void... voids) {
-////                    new Global(getApplicationContext());
-////                    Global.loadDatabase();
-//                    return null;
-//                }
-//            }.execute().get();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 }
