@@ -38,10 +38,11 @@ public class ProductListFragment extends Fragment {
         addProductButton.setOnClickListener(listener -> {
             String productName = productNameEditText.getText().toString().trim();
             Product product = new Product(productName);
-            Database.withContext(getContext()).addProduct(product);
+            if (Database.withContext(getContext()).addProduct(product)) {
+                adapter.notifyItemInserted(0);
+                recyclerView.smoothScrollToPosition(0);
+            }
             productNameEditText.setText("");
-            adapter.notifyItemInserted(0);
-            recyclerView.smoothScrollToPosition(0);
         });
         return view;
     }

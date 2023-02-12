@@ -68,7 +68,12 @@ public class Database {
         }
         return brandList;
     }
-    public void addProduct(Product product){
+    public boolean addProduct(Product product){
+        for (Product p : productList)
+            if (p.getName().equals(product.getName())){
+                Toast.makeText(context, "Duplicate product.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
         productList.add(0, product);
         JSONArray jsonArray = new JSONArray();
         Gson gson = new Gson();
@@ -79,8 +84,10 @@ public class Database {
             editor.putString(PRODUCT_TAG, jsonArray.toString());
             editor.apply();
             Toast.makeText(context, "Product added.", Toast.LENGTH_SHORT).show();
+            return true;
         } catch (JSONException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
