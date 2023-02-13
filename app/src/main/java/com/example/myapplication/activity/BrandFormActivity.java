@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
@@ -46,16 +47,24 @@ public class BrandFormActivity extends AppCompatActivity {
         productImageView = findViewById(R.id.productImageView);
         saveButton = findViewById(R.id.saveProductButton);
         saveButton.setOnClickListener(view -> {
-            String brandProduct = brandProductAutoComplete.getEditableText().toString();
+            String productName = brandProductAutoComplete.getEditableText().toString();
+            if (productName.isEmpty()) {
+                Toast.makeText(this, "Select a product.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             String brandName = brandNameText.getText().toString().trim();
-            Brand brand = new Brand(brandName, brandProduct);
-            Database.withContext(this).addBrand(brand);
-
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("fragment", R.id.brandsMenu);
-            startActivity(intent);
-            finishActivity(Database.INSERT);
-            finish();
+            if (brandName.isEmpty()) {
+                Toast.makeText(this, "Select a brand.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Brand brand = new Brand(brandName, productName);
+            if (Database.withContext(this).addBrand(brand)) {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("fragment", R.id.brandsMenu);
+                startActivity(intent);
+                finishActivity(Database.INSERT);
+                finish();
+            }
         });
     }
 }

@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="splashScreen">#31C48D</color>
     <color name="deleteButton">#CC4C4C</color>
+    <color name="viewButton">#4C70CC</color>
 </resources>

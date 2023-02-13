@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.ProductAdapter;
@@ -37,6 +38,10 @@ public class ProductListFragment extends Fragment {
 
         addProductButton.setOnClickListener(listener -> {
             String productName = productNameEditText.getText().toString().trim();
+            if (productName.isEmpty()){
+                Toast.makeText(getContext(), "Enter a product name.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Product product = new Product(productName);
             if (Database.withContext(getContext()).addProduct(product)) {
                 adapter.notifyItemInserted(0);

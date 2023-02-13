@@ -21,13 +21,41 @@
             android:src="@drawable/baseline_image_24"
             />
 
-        <Button
-            android:id="@+id/viewButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/viewBrandButton"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:icon="@drawable/baseline_remove_red_eye_24"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="View brand"
+            android:layout_toLeftOf="@id/deleteBrandButton"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/viewButton"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/deleteBrandButton"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:icon="@drawable/baseline_delete_24"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"
+            android:contentDescription="Delete brand"
             android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/splashScreen"
-            android:text="View" />
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/deleteButton"/>
+
 
         <TextView
             android:id="@+id/brandNameTextView"

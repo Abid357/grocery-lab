@@ -40,7 +40,13 @@ public class Database {
         return instance;
     }
 
-    public void addBrand(Brand brand){
+    public boolean addBrand(Brand brand) {
+        for (Brand b : brandList)
+            if (b.getBrandName().toLowerCase().equals(brand.getBrandName().toLowerCase()) &&
+                    b.getProductName().equals(brand.getProductName())) {
+                Toast.makeText(context, "Duplicate brand.", Toast.LENGTH_SHORT).show();
+                return false;
+            }
         brandList.add(0, brand);
         JSONArray jsonArray = new JSONArray();
         Gson gson = new Gson();
@@ -51,11 +57,28 @@ public class Database {
             editor.putString(BRAND_TAG, jsonArray.toString());
             editor.apply();
             Toast.makeText(context, "Brand added.", Toast.LENGTH_SHORT).show();
+            return true;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void deleteBrand(int position) {
+        brandList.remove(position);
+        JSONArray jsonArray = new JSONArray();
+        Gson gson = new Gson();
+        try {
+            for (Brand b : brandList)
+                jsonArray.put(new JSONObject(gson.toJson(b)));
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(BRAND_TAG, jsonArray.toString());
+            editor.apply();
+            Toast.makeText(context, "Brand deleted.", Toast.LENGTH_SHORT).show();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
     public List<Brand> getBrandList() {
         if (!brandList.isEmpty())
             return brandList;
@@ -68,9 +91,10 @@ public class Database {
         }
         return brandList;
     }
-    public boolean addProduct(Product product){
+
+    public boolean addProduct(Product product) {
         for (Product p : productList)
-            if (p.getName().equals(product.getName())){
+            if (p.getName().toLowerCase().equals(product.getName().toLowerCase())) {
                 Toast.makeText(context, "Duplicate product.", Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -91,7 +115,7 @@ public class Database {
         }
     }
 
-    public void deleteProduct(int position){
+    public void deleteProduct(int position) {
         productList.remove(position);
         JSONArray jsonArray = new JSONArray();
         Gson gson = new Gson();

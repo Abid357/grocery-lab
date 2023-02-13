@@ -1,23 +1,23 @@
 package com.example.myapplication.core;
 
 public class Brand {
-    private String name;
-    private String product;
+    private String brandName;
+    private String productName;
     private String imagePath;
     private double lastPurchasePrice;
     private String lastPurchaseLocation;
 
-    public Brand(String name, String product) {
-        this.name = name;
-        this.product = product;
+    public Brand(String brandName, String productName) {
+        this.brandName = brandName;
+        this.productName = productName;
     }
 
-    public String getName() {
-        return name;
+    public String getBrandName() {
+        return brandName;
     }
 
-    public String getProduct() {
-        return product;
+    public String getProductName() {
+        return productName;
     }
 
     public String getImagePath() {

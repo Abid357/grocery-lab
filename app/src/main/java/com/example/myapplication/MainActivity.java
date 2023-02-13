@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.brandsMenu:
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainFrameLayout, new BrandListFragment()).commit();
                     return true;
+                    //TODO: make a new class called Note
             }
             return false;
         });

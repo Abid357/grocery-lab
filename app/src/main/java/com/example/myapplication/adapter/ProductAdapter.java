@@ -41,7 +41,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(ProductAdapter.ProductViewHolder holder, int position) {
         holder.productName.setText(productList.get(holder.getAdapterPosition()).getName());
-        SharedPreferences sp = context.getSharedPreferences("grocerylab", Context.MODE_PRIVATE);
         holder.deleteProductButton.setOnClickListener(v -> {
             Database.withContext(context).deleteProduct(holder.getAdapterPosition());
             notifyItemRemoved(holder.getAdapterPosition());
