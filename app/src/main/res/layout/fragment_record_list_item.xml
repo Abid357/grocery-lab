@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    app:cardCornerRadius="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+        <ImageView
+            android:id="@+id/recordBrandImageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="2dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/cardview_dark_background"
+            android:src="@drawable/baseline_image_24"
+            />
+
+        <TextView
+            android:id="@+id/recordBrandNameTextView"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/recordBrandImageView"
+            android:text="Brand"
+            android:maxWidth="200dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/recordProductNameTextView"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recordBrandNameTextView"
+            android:layout_toEndOf="@id/recordBrandImageView"
+            android:text="Product"
+            android:maxWidth="200dp"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/fromTextView"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/recordBrandNameTextView"
+            android:layout_marginTop="10dp"
+            android:text="From"
+            android:textSize="10sp" />
+
+
+        <TextView
+            android:id="@+id/locationTextView"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fromTextView"
+            android:layout_toEndOf="@id/recordBrandNameTextView"
+            android:text="Location"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/pricePerUomLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/locationTextView"
+            android:layout_marginTop="10dp"
+            android:text="Price/Unit"
+            android:textSize="10sp" />
+
+
+        <TextView
+            android:id="@+id/pricePerUomValueTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pricePerUomLabelTextView"
+            android:layout_toEndOf="@id/locationTextView"
+            android:text="5.00 per kg"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

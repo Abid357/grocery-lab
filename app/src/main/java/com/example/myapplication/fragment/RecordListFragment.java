@@ -12,42 +12,42 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.activity.BrandFormActivity;
-import com.example.myapplication.adapter.BrandAdapter;
-import com.example.myapplication.core.Brand;
-import com.example.myapplication.core.Database;
+import com.example.myapplication.activity.RecordActivity;
+import com.example.myapplication.adapter.RecordAdapter;
+import com.example.myapplication.core.Record;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class BrandListFragment extends Fragment {
-    private BrandAdapter adapter;
+public class RecordListFragment extends Fragment {
+    private RecordAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_brand_list, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.brandRecyclerView);
-        FloatingActionButton addBrandButton = view.findViewById(R.id.addBrandButton);
+        View view = inflater.inflate(R.layout.fragment_record_list, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.recordRecyclerView);
+        FloatingActionButton addRecordButton = view.findViewById(R.id.addRecordButton);
 
-        List<Brand> brandList = Database.withContext(getContext()).getBrandList();
-        adapter = new BrandAdapter(getContext(), brandList);
+        List<Record> recordList = new ArrayList<>(); //Database.withContext(getContext()).getRecordList();
+        adapter = new RecordAdapter(getContext(), recordList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0)
-                    addBrandButton.hide();
+                    addRecordButton.hide();
                 else
-                    addBrandButton.show();
+                    addRecordButton.show();
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
 
-        addBrandButton.setOnClickListener(listener -> {
-            Intent intent = new Intent(getContext(), BrandFormActivity.class);
+        addRecordButton.setOnClickListener(listener -> {
+            Intent intent = new Intent(getContext(), RecordActivity.class);
             startActivity(intent);
         });
         return view;

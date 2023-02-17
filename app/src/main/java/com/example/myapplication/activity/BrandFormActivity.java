@@ -1,7 +1,5 @@
 package com.example.myapplication.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,18 +8,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.myapplication.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.R;
 import com.example.myapplication.core.Brand;
 import com.example.myapplication.core.Database;
-import com.example.myapplication.core.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 

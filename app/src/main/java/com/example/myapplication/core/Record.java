@@ -60,4 +60,79 @@ public class Record {
      * pricePerUom = (price / packageQuantity) / measure; if packaged
      */
     private float pricePerUom;
+
+    public Record(String productName, String brandName, float price) {
+        this.productName = productName;
+        this.brandName = brandName;
+        this.price = price;
+        quantity = 1;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public boolean isPurchase() {
+        return isPurchase;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public float getQuantity() {
+        return quantity;
+    }
+
+    public float getMeasure() {
+        return measure;
+    }
+
+    public boolean isPackaged() {
+        return isPackaged;
+    }
+
+    public int getPackageQuantity() {
+        return packageQuantity;
+    }
+
+    public float getPricePerUom() {
+        return pricePerUom;
+    }
+
+    public void setPurchase(boolean purchase) {
+        isPurchase = purchase;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setQuantity(float quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setMeasure(float measure) {
+        this.measure = measure;
+    }
+
+    public void setPackaged(boolean packaged) {
+        isPackaged = packaged;
+    }
+
+    public void setPackageQuantity(int packageQuantity) {
+        this.packageQuantity = packageQuantity;
+    }
+
+    public void setPricePerUom(float pricePerUom) {
+        this.pricePerUom = pricePerUom;
+    }
 }

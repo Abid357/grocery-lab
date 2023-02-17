@@ -48,7 +48,7 @@ public class Database {
                 int count = p.getBrandCount();
                 if (increment) count++;
                 else count--;
-                p.setBrandCount(count);
+                p.setBrandCount(Math.max(count, 0));
                 return;
             }
     }

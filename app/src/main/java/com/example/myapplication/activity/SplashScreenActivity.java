@@ -1,16 +1,15 @@
 package com.example.myapplication.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.dynamicanimation.animation.SpringAnimation;
-import androidx.dynamicanimation.animation.SpringForce;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.example.myapplication.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.dynamicanimation.animation.SpringAnimation;
+import androidx.dynamicanimation.animation.SpringForce;
+
 import com.example.myapplication.R;
 
 

@@ -1,17 +1,14 @@
-package com.example.myapplication;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.myapplication.activity;
 
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.R;
 import com.example.myapplication.fragment.BrandListFragment;
 import com.example.myapplication.fragment.ProductListFragment;
+import com.example.myapplication.fragment.RecordListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,10 +26,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.brandsMenu:
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainFrameLayout, new BrandListFragment()).commit();
                     return true;
+                case R.id.recordsMenu:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainFrameLayout, new RecordListFragment()).commit();
+                    return true;
             }
             return false;
         });
-        int defaultFragmentId = getIntent().getIntExtra("fragment", R.id.homeMenu);
-        mainNavigation.setSelectedItemId(defaultFragmentId);
+        mainNavigation.setSelectedItemId(R.id.homeMenu);
     }
 }
