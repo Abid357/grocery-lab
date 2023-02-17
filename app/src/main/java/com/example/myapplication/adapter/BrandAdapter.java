@@ -1,7 +1,6 @@
 package com.example.myapplication.adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandViewHol
 
     @Override
     public BrandAdapter.BrandViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_brand_list_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_brand_list_item, parent, false);
         return new BrandViewHolder(view);
     }
 

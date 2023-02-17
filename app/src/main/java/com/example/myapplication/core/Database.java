@@ -42,14 +42,26 @@ public class Database {
         return instance;
     }
 
+    private void updateBrandCount(String productName, boolean increment) {
+        for (Product p : productList)
+            if (p.getName().equals(productName)) {
+                int count = p.getBrandCount();
+                if (increment) count++;
+                else count--;
+                p.setBrandCount(count);
+                return;
+            }
+    }
+
     public boolean addBrand(Brand brand) {
         for (Brand b : brandList)
-            if (b.getBrandName().toLowerCase().equals(brand.getBrandName().toLowerCase()) &&
+            if (b.getBrandName().equalsIgnoreCase(brand.getBrandName()) &&
                     b.getProductName().equals(brand.getProductName())) {
                 Toast.makeText(context, "Duplicate brand.", Toast.LENGTH_SHORT).show();
                 return false;
             }
         brandList.add(0, brand);
+        updateBrandCount(brand.getProductName(), true);
         JSONArray jsonArray = new JSONArray();
         Gson gson = new Gson();
         try {
@@ -67,7 +79,8 @@ public class Database {
     }
 
     public void deleteBrand(int position) {
-        brandList.remove(position);
+        Brand brand = brandList.remove(position);
+        updateBrandCount(brand.getProductName(), false);
         JSONArray jsonArray = new JSONArray();
         Gson gson = new Gson();
         try {
@@ -81,6 +94,7 @@ public class Database {
             e.printStackTrace();
         }
     }
+
     public List<Brand> getBrandList() {
         if (!brandList.isEmpty())
             return brandList;
@@ -96,7 +110,7 @@ public class Database {
 
     public boolean addProduct(Product product) {
         for (Product p : productList)
-            if (p.getName().toLowerCase().equals(product.getName().toLowerCase())) {
+            if (p.getName().equalsIgnoreCase(product.getName())) {
                 Toast.makeText(context, "Duplicate product.", Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -146,7 +160,8 @@ public class Database {
         uomList.add("cm");
         uomList.add("m");
         uomList.add("sqft");
-        uomList.add("sqm");;
+        uomList.add("sqm");
+        ;
         uomList.add("ac");
         uomList.add("ha");
         uomList.add("mL");

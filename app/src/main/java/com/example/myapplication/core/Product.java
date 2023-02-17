@@ -4,18 +4,27 @@ public class Product {
     private String name;
     private String uom;
 
-    public Product(String name) {
+    private int brandCount;
+
+    public Product(String name, String uom) {
         this.name = name;
+        this.uom = uom;
+        brandCount = 0;
     }
 
     public String getName() {
         return name;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                '}';
+    public String getUom() {
+        return uom;
+    }
+
+    public int getBrandCount() {
+        return brandCount;
+    }
+
+    public void setBrandCount(int brandCount) {
+        this.brandCount = brandCount;
     }
 }

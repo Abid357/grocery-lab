@@ -6,45 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".fragment.ProductListFragment">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/addProductButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_alignParentEnd="true"
-        android:layout_margin="5dp"
-        android:text="Add" />
+        android:layout_margin="3dp"
+        app:icon="@drawable/baseline_add_24"
+        android:drawableEnd="@color/viewButton" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/uomTextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_height="50dp"
+        android:layout_margin="3dp"
         android:layout_toLeftOf="@id/addProductButton"
-        android:minWidth="100dp">
+        app:hintAnimationEnabled="false"
+        android:contentDescription="Unit of measure"
+        android:hint="Measure"
+        android:minWidth="140dp">
 
         <AutoCompleteTextView
             android:id="@+id/uomAutoCompleteTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:contentDescription="Unit of measure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
             android:inputType="none" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/productNameEditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/productLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="50dp"
+        android:layout_margin="3dp"
         android:layout_toLeftOf="@id/uomTextInputLayout"
-        android:hint="Product Name"
-        android:textSize="20sp" />
+        android:contentDescription="Product Name"
+        android:hint="Product">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/productInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="0dp"
+            android:layout_toLeftOf="@id/uomTextInputLayout" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/productNameEditText"
+        android:layout_below="@id/productLayout"
+        android:layout_marginTop="5dp"
         android:background="@color/white" />
 
 </RelativeLayout>

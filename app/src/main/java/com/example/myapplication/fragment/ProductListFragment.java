@@ -19,6 +19,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.adapter.ProductAdapter;
 import com.example.myapplication.core.Database;
 import com.example.myapplication.core.Product;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class ProductListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.productRecyclerView);
-        Button addProductButton = view.findViewById(R.id.addProductButton);
-        EditText productNameEditText = view.findViewById(R.id.productNameEditText);
+        MaterialButton addProductButton = view.findViewById(R.id.addProductButton);
+        EditText productNameEditText = view.findViewById(R.id.productInput);
 
         List<Product> productList = Database.withContext(getContext()).getProductList();
         ProductAdapter productAdapter = new ProductAdapter(getContext(), productList);
@@ -49,7 +50,12 @@ public class ProductListFragment extends Fragment {
                 Toast.makeText(getContext(), "Enter a product name.", Toast.LENGTH_SHORT).show();
                 return;
             }
-            Product product = new Product(productName);
+            String uom = uomAutoComplete.getEditableText().toString();
+            if (uom.isEmpty()) {
+                Toast.makeText(getContext(), "Select a unit of measure.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Product product = new Product(productName, uom);
             if (Database.withContext(getContext()).addProduct(product)) {
                 productAdapter.notifyItemInserted(0);
                 recyclerView.smoothScrollToPosition(0);
