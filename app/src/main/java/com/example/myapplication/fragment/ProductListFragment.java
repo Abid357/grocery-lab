@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,9 +34,14 @@ public class ProductListFragment extends Fragment {
         EditText productNameEditText = view.findViewById(R.id.productNameEditText);
 
         List<Product> productList = Database.withContext(getContext()).getProductList();
-        ProductAdapter adapter = new ProductAdapter(getContext(), productList);
-        recyclerView.setAdapter(adapter);
+        ProductAdapter productAdapter = new ProductAdapter(getContext(), productList);
+        recyclerView.setAdapter(productAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        List<String> uomList = Database.withContext(getContext()).getUomList();
+        AutoCompleteTextView uomAutoComplete = view.findViewById(R.id.uomAutoCompleteTextView);
+        ArrayAdapter<String> uomAdapter = new ArrayAdapter<>(getContext(), R.layout.brand_product_auto_complete_text_view, uomList);
+        uomAutoComplete.setAdapter(uomAdapter);
 
         addProductButton.setOnClickListener(listener -> {
             String productName = productNameEditText.getText().toString().trim();
@@ -44,7 +51,7 @@ public class ProductListFragment extends Fragment {
             }
             Product product = new Product(productName);
             if (Database.withContext(getContext()).addProduct(product)) {
-                adapter.notifyItemInserted(0);
+                productAdapter.notifyItemInserted(0);
                 recyclerView.smoothScrollToPosition(0);
             }
             productNameEditText.setText("");

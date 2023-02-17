@@ -26,12 +26,14 @@ public class Database {
     private SharedPreferences sharedPreferences;
     private List<Product> productList;
     private List<Brand> brandList;
+    private List<String> uomList;
 
     private Database(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences("grocerylab", Context.MODE_PRIVATE);
         productList = new ArrayList<>();
         brandList = new ArrayList<>();
+        uomList = new ArrayList<>();
     }
 
     public static Database withContext(Context context) {
@@ -129,6 +131,27 @@ public class Database {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<String> getUomList() {
+        if (!uomList.isEmpty())
+            return uomList;
+        uomList.add("Unit");
+        uomList.add("mg");
+        uomList.add("g");
+        uomList.add("kg");
+        uomList.add("oz");
+        uomList.add("lb");
+        uomList.add("mm");
+        uomList.add("cm");
+        uomList.add("m");
+        uomList.add("sqft");
+        uomList.add("sqm");;
+        uomList.add("ac");
+        uomList.add("ha");
+        uomList.add("mL");
+        uomList.add("L");
+        return uomList;
     }
 
     public List<Product> getProductList() {

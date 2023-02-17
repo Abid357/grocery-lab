@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,10 +57,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         TextView productName;
         MaterialButton deleteProductButton;
 
+        AutoCompleteTextView uomAutoComplete;
+
         public ProductViewHolder(View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.productNameTextView);
             deleteProductButton = itemView.findViewById(R.id.deleteProductButton);
+            uomAutoComplete = itemView.findViewById(R.id.uomAutoCompleteTextView);
         }
     }
 }

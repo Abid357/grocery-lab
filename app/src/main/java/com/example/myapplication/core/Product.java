@@ -2,6 +2,7 @@ package com.example.myapplication.core;
 
 public class Product {
     private String name;
+    private String uom;
 
     public Product(String name) {
         this.name = name;
