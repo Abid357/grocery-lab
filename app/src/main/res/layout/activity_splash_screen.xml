@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/splashLayout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.SplashScreenActivity"
-    android:background="@color/splashScreen">
+    android:background="@color/white">
 
 
     <ImageView
@@ -13,19 +14,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@color/splashScreen"
-        android:padding="20sp"
-        android:src="@drawable/logo" />
+        android:background="@color/white"
+        android:src="@drawable/grocery_lab" />
 
 
     <ImageView
-        android:id="@+id/titleImageView"
+        android:id="@+id/cartEmptyImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/titleImageView"
         android:layout_centerInParent="true"
-        android:paddingTop="130dp"
-        android:src="@drawable/cart_resized"
-       />
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"
+        android:paddingTop="205dp"
+        android:src="@drawable/cart_empty_resized" />
+
+    <ImageView
+        android:id="@+id/cartFullImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="182dp"
+        android:visibility="invisible"
+        android:src="@drawable/cart_full_resized" />
 
 </RelativeLayout>

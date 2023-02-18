@@ -1,19 +1,19 @@
 package com.example.myapplication.core;
 
 public class Brand {
-    private String brandName;
+    private String name;
     private String productName;
     private String imagePath;
     private double lastPurchasePrice;
     private String lastPurchaseLocation;
 
-    public Brand(String brandName, String productName) {
-        this.brandName = brandName;
+    public Brand(String name, String productName) {
+        this.name = name;
         this.productName = productName;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getName() {
+        return name;
     }
 
     public String getProductName() {

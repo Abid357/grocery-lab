@@ -34,7 +34,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandViewHol
 
     @Override
     public void onBindViewHolder(BrandAdapter.BrandViewHolder holder, int position) {
-        holder.brandName.setText(brands.get(holder.getAdapterPosition()).getBrandName());
+        holder.brandName.setText(brands.get(holder.getAdapterPosition()).getName());
         holder.brandProduct.setText(brands.get(holder.getAdapterPosition()).getProductName());
         holder.deleteBrandButton.setOnClickListener(v -> {
             Database.withContext(context).deleteBrand(holder.getAdapterPosition());

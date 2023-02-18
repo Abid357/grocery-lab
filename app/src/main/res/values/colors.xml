@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="splashScreen">#31C48D</color>
+    <color name="splashScreen">#2D7282</color>
     <color name="deleteButton">#CC4C4C</color>
     <color name="viewButton">#4C70CC</color>
 </resources>

@@ -55,7 +55,7 @@ public class Database {
 
     public boolean addBrand(Brand brand) {
         for (Brand b : brandList)
-            if (b.getBrandName().equalsIgnoreCase(brand.getBrandName()) &&
+            if (b.getName().equalsIgnoreCase(brand.getName()) &&
                     b.getProductName().equals(brand.getProductName())) {
                 Toast.makeText(context, "Duplicate brand.", Toast.LENGTH_SHORT).show();
                 return false;
@@ -186,6 +186,13 @@ public class Database {
         List<String> stringList = new ArrayList<>();
         for (Product product : getProductList())
             stringList.add(product.getName());
+        return stringList;
+    }
+
+    public List<String> getBrandStringList() {
+        List<String> stringList = new ArrayList<>();
+        for (Brand brand : getBrandList())
+            stringList.add(brand.getName());
         return stringList;
     }
 }

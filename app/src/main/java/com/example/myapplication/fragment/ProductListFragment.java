@@ -39,7 +39,7 @@ public class ProductListFragment extends Fragment {
 
         List<String> uomList = Database.withContext(getContext()).getUomList();
         AutoCompleteTextView uomAutoComplete = view.findViewById(R.id.uomAutoCompleteTextView);
-        ArrayAdapter<String> uomAdapter = new ArrayAdapter<>(getContext(), R.layout.brand_product_auto_complete_text_view, uomList);
+        ArrayAdapter<String> uomAdapter = new ArrayAdapter<>(getContext(), R.layout.product_auto_complete_text_view, uomList);
         uomAutoComplete.setAdapter(uomAdapter);
 
         addProductButton.setOnClickListener(listener -> {

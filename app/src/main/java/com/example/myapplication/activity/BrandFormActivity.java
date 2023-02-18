@@ -32,7 +32,7 @@ public class BrandFormActivity extends AppCompatActivity {
 
         List<String> productStringList = Database.withContext(this).getProductStringList();
         brandProductAutoComplete = findViewById(R.id.brandProductAutoCompleteTextView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.brand_product_auto_complete_text_view, productStringList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.product_auto_complete_text_view, productStringList);
         brandProductAutoComplete.setAdapter(adapter);
 
         brandNameText = findViewById(R.id.brandNameEditText);

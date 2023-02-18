@@ -21,18 +21,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 public class BrandListFragment extends Fragment {
-    private BrandAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_brand_list, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.brandRecyclerView);
         FloatingActionButton addBrandButton = view.findViewById(R.id.addBrandButton);
 
         List<Brand> brandList = Database.withContext(getContext()).getBrandList();
-        adapter = new BrandAdapter(getContext(), brandList);
+        BrandAdapter adapter = new BrandAdapter(getContext(), brandList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
