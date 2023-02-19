@@ -6,13 +6,13 @@ public class Record {
      * Product name.
      * For example: Noodles, Washing Powder
      */
-    private String productName;
+    private final String productName;
 
     /**
      * Brand name of the product.
      * For example: Maggie, OMO
      */
-    private String brandName;
+    private final String brandName;
 
     /**
      * A record may be a purchase or just for the sake of record-keeping.
@@ -28,7 +28,7 @@ public class Record {
     /**
      * Price of a single unit or a single packaged unit for the product.
      */
-    private float price;
+    private final float price;
 
     /**
      * Quantity in units or the number of packages for the product.

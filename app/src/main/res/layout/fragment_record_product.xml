@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
-            android:hint="Select a Product"
+            android:hint="Select Product"
             app:startIconDrawable="@drawable/baseline_filter_list_24">
 
             <AutoCompleteTextView
@@ -31,6 +31,22 @@
                 android:textSize="17sp"
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/productBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="6dp"
+                android:contentDescription="Back"
+                android:drawableEnd="@drawable/baseline_arrow_circle_left_24"
+                android:paddingEnd="25dp" />
+        </RelativeLayout>
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

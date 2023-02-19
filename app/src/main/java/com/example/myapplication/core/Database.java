@@ -189,10 +189,13 @@ public class Database {
         return stringList;
     }
 
-    public List<String> getBrandStringList() {
+    public List<String> getBrandStringList(String productName) {
         List<String> stringList = new ArrayList<>();
-        for (Brand brand : getBrandList())
-            stringList.add(brand.getName());
+        if (productName != null) {
+            for (Brand brand : getBrandList())
+                if (brand.getProductName().equals(productName))
+                    stringList.add(brand.getName());
+        }
         return stringList;
     }
 }
