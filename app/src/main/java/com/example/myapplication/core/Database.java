@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -108,6 +110,13 @@ public class Database {
         return brandList;
     }
 
+    public Product getProductByName(@NonNull String productName) {
+        for (Product p : productList)
+            if (p.getName().equals(productName))
+                return p;
+        return null;
+    }
+
     public boolean addProduct(Product product) {
         for (Product p : productList)
             if (p.getName().equalsIgnoreCase(product.getName())) {
@@ -189,13 +198,11 @@ public class Database {
         return stringList;
     }
 
-    public List<String> getBrandStringList(String productName) {
+    public List<String> getBrandStringList(@NonNull String productName) {
         List<String> stringList = new ArrayList<>();
-        if (productName != null) {
-            for (Brand brand : getBrandList())
-                if (brand.getProductName().equals(productName))
-                    stringList.add(brand.getName());
-        }
+        for (Brand brand : getBrandList())
+            if (brand.getProductName().equals(productName))
+                stringList.add(brand.getName());
         return stringList;
     }
 }

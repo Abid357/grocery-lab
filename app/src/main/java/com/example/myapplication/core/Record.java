@@ -1,5 +1,7 @@
 package com.example.myapplication.core;
 
+import java.util.Date;
+
 public class Record {
 
     /**
@@ -60,6 +62,11 @@ public class Record {
      * pricePerUom = (price / packageQuantity) / measure; if packaged
      */
     private float pricePerUom;
+
+    /**
+     * Date of purchase or entry of record.
+     */
+    private Date date;
 
     public Record(String productName, String brandName, float price) {
         this.productName = productName;

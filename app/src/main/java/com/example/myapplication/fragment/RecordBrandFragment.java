@@ -25,15 +25,14 @@ public class RecordBrandFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_record_brand, container, false);
 
         Bundle bundle = getArguments();
-        String productName = null;
-        if (bundle != null)
-            productName = bundle.getString("product");
+        assert bundle != null;
+        String productName = bundle.getString("product");
         List<String> brandStringList = Database.withContext(getContext()).getBrandStringList(productName);
         AutoCompleteTextView recordBrandAutoComplete = view.findViewById(R.id.recordBrandAutoCompleteTextView);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.product_auto_complete_text_view, brandStringList);
         recordBrandAutoComplete.setAdapter(adapter);
         recordBrandAutoComplete.setOnItemClickListener((adapterView, view1, i, l) -> {
-            if (bundle == null) return;
+            bundle.putString("product", productName);
             bundle.putString("brand", recordBrandAutoComplete.getEditableText().toString());
             RecordPurchaseFragment fragment = new RecordPurchaseFragment();
             fragment.setArguments(bundle);
