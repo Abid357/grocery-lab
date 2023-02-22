@@ -1,27 +1,26 @@
 package com.example.myapplication.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.myapplication.R;
+import com.example.myapplication.activity.MainActivity;
 import com.example.myapplication.core.Database;
 import com.example.myapplication.core.Product;
+import com.example.myapplication.core.Record;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
-import java.util.List;
-import java.util.Objects;
 
 public class RecordQuantityFragment extends Fragment {
 
@@ -34,15 +33,16 @@ public class RecordQuantityFragment extends Fragment {
         String productName;
         assert bundle != null;
         productName = bundle.getString("product");
-        Product product =  Database.withContext(getContext()).getProductByName(productName);
+        Product product = Database.withContext(getContext()).getProductByName(productName);
 
         TextInputEditText measureEditText = view.findViewById(R.id.measureEditText);
         TextInputLayout measureInputLayout = view.findViewById(R.id.measureInputLayout);
         if (!product.getUom().equals("Unit"))
             measureInputLayout.setSuffixText(product.getUom());
-         else
+        else
             measureInputLayout.setVisibility(View.GONE);
 
+        TextInputEditText packageQuantityEditText = view.findViewById(R.id.packageQuantityEditText);
         TextInputEditText priceEditText = view.findViewById(R.id.priceEditText);
         TextInputEditText quantityEditText = view.findViewById(R.id.quantityEditText);
         TextView switchTextView = view.findViewById(R.id.packageSwitchTextView);
@@ -65,24 +65,6 @@ public class RecordQuantityFragment extends Fragment {
         packageSwitch.setChecked(true);
         packageSwitch.setChecked(false);
 
-//        List<String> productStringList = Database.withContext(getContext()).getProductStringList();
-//        AutoCompleteTextView recordProductAutoComplete = view.findViewById(R.id.recordProductAutoCompleteTextView);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.product_auto_complete_text_view, productStringList);
-//        recordProductAutoComplete.setAdapter(adapter);
-//        recordProductAutoComplete.setOnItemClickListener((adapterView, view1, i, l) -> {
-//            Bundle bundle = new Bundle();
-//            bundle.putString("product", recordProductAutoComplete.getEditableText().toString());
-//            RecordBrandFragment fragment = new RecordBrandFragment();
-//            fragment.setArguments(bundle);
-//
-//            getParentFragmentManager().beginTransaction()
-//                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
-//                    .replace(R.id.mainFrameLayout, fragment)
-//                    .setReorderingAllowed(true)
-//                    .addToBackStack(null)
-//                    .commit();
-//        });
-
         MaterialButton backButton = view.findViewById(R.id.quantityBackButton);
         backButton.setOnClickListener(view0 -> getActivity().onBackPressed());
 
@@ -90,31 +72,41 @@ public class RecordQuantityFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!product.getUom().equals("Unit")){
+                if (!product.getUom().equals("Unit")) {
                     String measureString = measureEditText.getText().toString();
                     double measure = measureString.isEmpty() ? 0.0 : Double.parseDouble(measureString);
-                    if (isZeroOrNegativeValue("Measure", measure)) return;
+                    if (isZero("Measure", measure)) return;
                 }
+
+                if (packageSwitch.isChecked()) {
+                    String quantityString = packageQuantityEditText.getText().toString();
+                    int quantity = quantityString.isEmpty() ? 0 : Integer.parseInt(quantityString);
+                    if (isZero("Units inside one package", quantity)) return;
+                }
+
                 String quantityString = quantityEditText.getText().toString();
                 int quantity = quantityString.isEmpty() ? 0 : Integer.parseInt(quantityString);
-                String quantityLabel = packageSwitch.isSelected() ? "Package Quantity" : "Quantity";
-                if (isZeroOrNegativeValue(quantityLabel, quantity)) return;
+                String quantityLabel = packageSwitch.isChecked() ? "Package Quantity" : "Quantity";
+                if (isZero(quantityLabel, quantity)) return;
 
                 String priceString = priceEditText.getText().toString();
                 double totalPrice = priceString.isEmpty() ? 0 : Double.parseDouble(priceString);
-                if (isZeroOrNegativeValue("Total Price", totalPrice)) return;
+                if (isZero("Total Price", totalPrice)) return;
+
+                String productName = bundle.getString("product");
+                String brandName = bundle.getString("brand");
+                Record record = new Record(productName, brandName, quantity, totalPrice, 0);
+                if (Database.withContext(getContext()).addRecord(record)) {
+                    getParentFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                }
             }
         });
         return view;
     }
 
-    private boolean isZeroOrNegativeValue(@NonNull String field, double value){
+    private boolean isZero(@NonNull String field, double value) {
         if (value == 0) {
             Toast.makeText(getContext(), field + " cannot be zero.", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        else if (value < 0) {
-            Toast.makeText(getContext(), field + " cannot be negative.", Toast.LENGTH_SHORT).show();
             return true;
         }
         return false;

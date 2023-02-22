@@ -30,18 +30,18 @@ public class Record {
     /**
      * Price of a single unit or a single packaged unit for the product.
      */
-    private final float price;
+    private final double price;
 
     /**
      * Quantity in units or the number of packages for the product.
      */
-    private float quantity;
+    private double quantity;
 
     /**
      * Applicable only if the product uses a unit of measure (UoM).
      * For example: a 200ml Joocy mango juice would have measure=200
      */
-    private float measure;
+    private double measure;
 
     /**
      * Indicates if the product comes in packages.
@@ -61,18 +61,25 @@ public class Record {
      * pricePerUom = price / measure;
      * pricePerUom = (price / packageQuantity) / measure; if packaged
      */
-    private float pricePerUom;
+    private double pricePerUom;
 
     /**
      * Date of purchase or entry of record.
      */
-    private Date date;
+    private Date purchaseDate;
 
-    public Record(String productName, String brandName, float price) {
+    /**
+     * Date of creation of the record.
+     */
+    private final Date creationDate;
+
+    public Record(String productName, String brandName, int quantity, double price, double pricePerUom) {
         this.productName = productName;
         this.brandName = brandName;
+        this.quantity = quantity;
         this.price = price;
-        quantity = 1;
+        this.pricePerUom = pricePerUom;
+        creationDate = new Date();
     }
 
     public String getProductName() {
@@ -91,15 +98,15 @@ public class Record {
         return location;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public float getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public float getMeasure() {
+    public double getMeasure() {
         return measure;
     }
 
@@ -111,7 +118,7 @@ public class Record {
         return packageQuantity;
     }
 
-    public float getPricePerUom() {
+    public double getPricePerUom() {
         return pricePerUom;
     }
 
@@ -123,11 +130,11 @@ public class Record {
         this.location = location;
     }
 
-    public void setQuantity(float quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
-    public void setMeasure(float measure) {
+    public void setMeasure(double measure) {
         this.measure = measure;
     }
 
@@ -139,7 +146,19 @@ public class Record {
         this.packageQuantity = packageQuantity;
     }
 
-    public void setPricePerUom(float pricePerUom) {
+    public void setPricePerUom(double pricePerUom) {
         this.pricePerUom = pricePerUom;
+    }
+
+    public Date getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(Date purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
     }
 }

@@ -1,11 +1,17 @@
 package com.example.myapplication.core;
 
+import java.util.Date;
+
 public class Brand {
     private String name;
     private String productName;
     private String imagePath;
     private double lastPurchasePrice;
     private String lastPurchaseLocation;
+
+    private int recordCount;
+
+    private Date lastPurchaseDate;
 
     public Brand(String name, String productName) {
         this.name = name;
@@ -42,5 +48,21 @@ public class Brand {
 
     public void setLastPurchaseLocation(String lastPurchaseLocation) {
         this.lastPurchaseLocation = lastPurchaseLocation;
+    }
+
+    public Date getLastPurchaseDate() {
+        return lastPurchaseDate;
+    }
+
+    public void setLastPurchaseDate(Date lastPurchaseDate) {
+        this.lastPurchaseDate = lastPurchaseDate;
+    }
+
+    public int getRecordCount() {
+        return recordCount;
+    }
+
+    public void setRecordCount(int recordCount) {
+        this.recordCount = recordCount;
     }
 }

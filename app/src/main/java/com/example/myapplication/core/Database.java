@@ -20,6 +20,7 @@ import java.util.List;
 public class Database {
     private static final String PRODUCT_TAG = "products";
     private static final String BRAND_TAG = "brands";
+    private static final String RECORD_TAG = "records";
     public static final int INSERT = 1;
     public static final int EDIT = 2;
     public static final int DELETE = 3;
@@ -28,7 +29,8 @@ public class Database {
     private SharedPreferences sharedPreferences;
     private List<Product> productList;
     private List<Brand> brandList;
-    private List<String> uomList;
+    private final List<String> uomList;
+    private List<Record> recordList;
 
     private Database(Context context) {
         this.context = context;
@@ -36,12 +38,60 @@ public class Database {
         productList = new ArrayList<>();
         brandList = new ArrayList<>();
         uomList = new ArrayList<>();
+        recordList = new ArrayList<>();
     }
 
     public static Database withContext(Context context) {
         if (instance == null)
             instance = new Database(context);
         return instance;
+    }
+
+    public boolean addRecord(Record record) {
+        recordList.add(0, record);
+        updateRecordCount(record.getProductName(), record.getBrandName(), true);
+        JSONArray jsonArray = new JSONArray();
+        Gson gson = new Gson();
+        try {
+            for (Record r : recordList)
+                jsonArray.put(new JSONObject(gson.toJson(r)));
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(RECORD_TAG, jsonArray.toString());
+            editor.apply();
+            Toast.makeText(context, "Record added.", Toast.LENGTH_SHORT).show();
+            return true;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void deleteRecord(int position) {
+        Record record = recordList.remove(position);
+        updateRecordCount(record.getProductName(), record.getBrandName(), false);
+        JSONArray jsonArray = new JSONArray();
+        Gson gson = new Gson();
+        try {
+            for (Record r : recordList)
+                jsonArray.put(new JSONObject(gson.toJson(r)));
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(RECORD_TAG, jsonArray.toString());
+            editor.apply();
+            Toast.makeText(context, "Record deleted.", Toast.LENGTH_SHORT).show();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateRecordCount(String productName, String brandName, boolean increment) {
+        for (Brand b : brandList)
+            if (b.getName().equals(brandName) && b.getProductName().equals(productName)) {
+                int count = b.getRecordCount();
+                if (increment) count++;
+                else count--;
+                b.setRecordCount(Math.max(count, 0));
+                return;
+            }
     }
 
     private void updateBrandCount(String productName, boolean increment) {
