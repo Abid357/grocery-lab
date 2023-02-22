@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
 import com.example.myapplication.activity.BrandFormActivity;
 import com.example.myapplication.adapter.BrandAdapter;
+import com.example.myapplication.adapter.RecordAdapter;
 import com.example.myapplication.core.Brand;
 import com.example.myapplication.core.Database;
+import com.example.myapplication.core.Record;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -27,24 +29,24 @@ public class RecordListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_record_list, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recordRecyclerView);
-        FloatingActionButton addBrandButton = view.findViewById(R.id.addRecordButton);
+        FloatingActionButton addRecordButton = view.findViewById(R.id.addRecordButton);
 
-//        List<Brand> brandList = Database.withContext(getContext()).getBrandList();
-//        BrandAdapter adapter = new BrandAdapter(getContext(), brandList);
-//        recyclerView.setAdapter(adapter);
+        List<Record> recordList = Database.withContext(getContext()).getRecordList();
+        RecordAdapter adapter = new RecordAdapter(getContext(), recordList);
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0)
-                    addBrandButton.hide();
+                    addRecordButton.hide();
                 else
-                    addBrandButton.show();
+                    addRecordButton.show();
                 super.onScrolled(recyclerView, dx, dy);
             }
         });
 
-        addBrandButton.setOnClickListener(listener -> getParentFragmentManager().beginTransaction()
+        addRecordButton.setOnClickListener(listener -> getParentFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
                 .replace(R.id.mainFrameLayout, new RecordProductFragment())
                 .setReorderingAllowed(true)

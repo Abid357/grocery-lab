@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-        mainNavigation.setSelectedItemId(R.id.homeMenu);
+        int fragmentId = getIntent().getIntExtra("fragment", R.id.homeMenu);
+        mainNavigation.setSelectedItemId(fragmentId);
     }
 }

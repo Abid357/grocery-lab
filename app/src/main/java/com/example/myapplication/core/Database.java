@@ -2,6 +2,7 @@ package com.example.myapplication.core;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -145,6 +146,19 @@ public class Database {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Record> getRecordList() {
+        if (!recordList.isEmpty())
+            return recordList;
+        String jsonData = sharedPreferences.getString(RECORD_TAG, "");
+        if (!jsonData.isEmpty()) {
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<Record>>() {
+            }.getType();
+            recordList = gson.fromJson(jsonData, type);
+        }
+        return recordList;
     }
 
     public List<Brand> getBrandList() {

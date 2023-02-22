@@ -69,6 +69,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                                             public void onAnimationEnd(@NonNull Animator animator) {
                                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                                 startActivity(intent);
+                                                finish();
                                             }
 
                                             @Override

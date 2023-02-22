@@ -69,36 +69,32 @@ public class RecordQuantityFragment extends Fragment {
         backButton.setOnClickListener(view0 -> getActivity().onBackPressed());
 
         MaterialButton nextButton = view.findViewById(R.id.quantityNextButton);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!product.getUom().equals("Unit")) {
-                    String measureString = measureEditText.getText().toString();
-                    double measure = measureString.isEmpty() ? 0.0 : Double.parseDouble(measureString);
-                    if (isZero("Measure", measure)) return;
-                }
+        nextButton.setOnClickListener(view0 -> {
+            if (!product.getUom().equals("Unit")) {
+                String measureString = measureEditText.getText().toString();
+                double measure = measureString.isEmpty() ? 0.0 : Double.parseDouble(measureString);
+                if (isZero("Measure", measure)) return;
+            }
 
-                if (packageSwitch.isChecked()) {
-                    String quantityString = packageQuantityEditText.getText().toString();
-                    int quantity = quantityString.isEmpty() ? 0 : Integer.parseInt(quantityString);
-                    if (isZero("Units inside one package", quantity)) return;
-                }
-
-                String quantityString = quantityEditText.getText().toString();
+            if (packageSwitch.isChecked()) {
+                String quantityString = packageQuantityEditText.getText().toString();
                 int quantity = quantityString.isEmpty() ? 0 : Integer.parseInt(quantityString);
-                String quantityLabel = packageSwitch.isChecked() ? "Package Quantity" : "Quantity";
-                if (isZero(quantityLabel, quantity)) return;
+                if (isZero("Units inside one package", quantity)) return;
+            }
 
-                String priceString = priceEditText.getText().toString();
-                double totalPrice = priceString.isEmpty() ? 0 : Double.parseDouble(priceString);
-                if (isZero("Total Price", totalPrice)) return;
+            String quantityString = quantityEditText.getText().toString();
+            int quantity = quantityString.isEmpty() ? 0 : Integer.parseInt(quantityString);
+            String quantityLabel = packageSwitch.isChecked() ? "Package Quantity" : "Quantity";
+            if (isZero(quantityLabel, quantity)) return;
 
-                String productName = bundle.getString("product");
-                String brandName = bundle.getString("brand");
-                Record record = new Record(productName, brandName, quantity, totalPrice, 0);
-                if (Database.withContext(getContext()).addRecord(record)) {
-                    getParentFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                }
+            String priceString = priceEditText.getText().toString();
+            double totalPrice = priceString.isEmpty() ? 0 : Double.parseDouble(priceString);
+            if (isZero("Total Price", totalPrice)) return;
+
+            String brandName = bundle.getString("brand");
+            Record record = new Record(productName, brandName, quantity, totalPrice, 0);
+            if (Database.withContext(getContext()).addRecord(record)) {
+                getParentFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         });
         return view;

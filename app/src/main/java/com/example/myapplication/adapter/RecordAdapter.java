@@ -17,17 +17,17 @@ import java.util.List;
 
 
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordViewHolder> {
-    private List<Record> brands;
-    private Context context;
+    private List<Record> records;
+    private final Context context;
 
-    public RecordAdapter(Context context, List<Record> brands) {
+    public RecordAdapter(Context context, List<Record> records) {
         this.context = context;
-        this.brands = brands;
+        this.records = records;
     }
 
     @Override
     public RecordAdapter.RecordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.fragment_brand_list_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_record_list_item, parent, false);
         return new RecordViewHolder(view);
     }
 
@@ -43,7 +43,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
 
     @Override
     public int getItemCount() {
-        return brands.size();
+        return records.size();
     }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {

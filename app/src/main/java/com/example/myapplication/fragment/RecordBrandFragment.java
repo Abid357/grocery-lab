@@ -31,7 +31,7 @@ public class RecordBrandFragment extends Fragment {
         AutoCompleteTextView recordBrandAutoComplete = view.findViewById(R.id.recordBrandAutoCompleteTextView);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.product_auto_complete_text_view, brandStringList);
         recordBrandAutoComplete.setAdapter(adapter);
-        recordBrandAutoComplete.setOnItemClickListener((adapterView, view1, i, l) -> {
+        recordBrandAutoComplete.setOnItemClickListener((adapterView, view0, i, l) -> {
             bundle.putString("product", productName);
             bundle.putString("brand", recordBrandAutoComplete.getEditableText().toString());
             RecordPurchaseFragment fragment = new RecordPurchaseFragment();
@@ -44,6 +44,11 @@ public class RecordBrandFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
+        recordBrandAutoComplete.postDelayed(() -> {
+            recordBrandAutoComplete.showDropDown();
+            recordBrandAutoComplete.setText("");
+            recordBrandAutoComplete.setSelection(recordBrandAutoComplete.getText().length());
+        },200);
 
         MaterialButton backButton = view.findViewById(R.id.brandBackButton);
         backButton.setOnClickListener(view0 -> getActivity().onBackPressed());
