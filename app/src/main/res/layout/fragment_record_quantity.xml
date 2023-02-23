@@ -108,12 +108,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/perPriceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/border_text_view"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="10 / Unit"
+                    android:textColor="#D50000"
+                    android:textSize="17sp" />
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/quantityNextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_below="@id/perPriceTextView"
                     android:layout_margin="6dp"
                     android:contentDescription="Next"
                     android:drawableEnd="@drawable/baseline_arrow_circle_right_24"
@@ -124,8 +139,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
                     android:layout_margin="6dp"
+                    android:layout_below="@id/perPriceTextView"
                     android:contentDescription="Back"
                     android:drawableEnd="@drawable/baseline_arrow_circle_left_24"
                     android:paddingEnd="25dp" />
