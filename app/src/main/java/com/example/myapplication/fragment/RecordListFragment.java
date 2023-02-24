@@ -1,6 +1,5 @@
 package com.example.myapplication.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.activity.BrandFormActivity;
-import com.example.myapplication.adapter.BrandAdapter;
 import com.example.myapplication.adapter.RecordAdapter;
-import com.example.myapplication.core.Brand;
 import com.example.myapplication.core.Database;
 import com.example.myapplication.core.Record;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

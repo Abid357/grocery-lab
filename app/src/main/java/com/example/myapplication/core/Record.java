@@ -73,9 +73,13 @@ public class Record {
      */
     private final Date creationDate;
 
-    public Record(String productName, String brandName, int quantity, double price, double pricePerUom) {
+    public Record(String productName, String brandName, double measure, int packageQuantity, int quantity, double price, double pricePerUom) {
         this.productName = productName;
         this.brandName = brandName;
+        this.measure = measure;
+        this.packageQuantity = packageQuantity;
+        if (packageQuantity != -1)
+            isPackaged = true;
         this.quantity = quantity;
         this.price = price;
         this.pricePerUom = pricePerUom;

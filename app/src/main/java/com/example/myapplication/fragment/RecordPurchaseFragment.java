@@ -10,17 +10,16 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
+import com.example.myapplication.core.Utils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class RecordPurchaseFragment extends Fragment {
 
     TextInputEditText dateEditText;
-    SimpleDateFormat dateFormatter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,8 +28,6 @@ public class RecordPurchaseFragment extends Fragment {
 
         Bundle bundle = getArguments();
         assert bundle != null;
-        String dateFormat = "dd-MM-YYYY";
-        dateFormatter = new SimpleDateFormat(dateFormat);
         dateEditText = view.findViewById(R.id.dateEditText);
         dateEditText.setOnClickListener(view1 -> showDatePicker());
         TextInputEditText locationEditText = view.findViewById(R.id.locationTextInput);
@@ -53,7 +50,7 @@ public class RecordPurchaseFragment extends Fragment {
         MaterialButton nextButton = view.findViewById(R.id.purchaseNextButton);
         nextButton.setOnClickListener(view12 -> {
             bundle.putBoolean("isPurchase", purchaseSwitch.isSelected());
-            bundle.putString("date", dateEditText.getText().toString());
+            bundle.putString("purchaseDate", dateEditText.getText().toString());
             bundle.putString("location", locationEditText.getText().toString());
             RecordQuantityFragment fragment = new RecordQuantityFragment();
             fragment.setArguments(bundle);
@@ -71,7 +68,7 @@ public class RecordPurchaseFragment extends Fragment {
     private void showDatePicker() {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog dialog = new DatePickerDialog(getActivity(), (datePicker, year, month, day) -> {
-            String dateString = dateFormatter.format(calendar.getTime());
+            String dateString = Utils.formatDate(calendar.getTime());
             dateEditText.setText(dateString);
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         dialog.show();
