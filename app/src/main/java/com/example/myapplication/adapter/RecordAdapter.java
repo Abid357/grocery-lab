@@ -1,6 +1,7 @@
 package com.example.myapplication.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +34,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
 
     @Override
     public void onBindViewHolder(RecordAdapter.RecordViewHolder holder, int position) {
-//        holder.brandName.setText(brands.get(holder.getAdapterPosition()).getRecordName());
-//        holder.brandProduct.setText(brands.get(holder.getAdapterPosition()).getProductName());
-//        holder.deleteRecordButton.setOnClickListener(v -> {
-//            Database.withContext(context).deleteRecord(holder.getAdapterPosition());
-//            notifyItemRemoved(holder.getAdapterPosition());
-//        });
+//        holder.brandName.setText(records.get(holder.getAdapterPosition()).getBrandName());
+//        holder.brandProduct.setText(records.get(holder.getAdapterPosition()).getProductName());
+        Log.i("okok", records.toString());
     }
 
     @Override
@@ -54,8 +52,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         public RecordViewHolder(View itemView) {
             super(itemView);
 //            brandImage = itemView.findViewById(R.id.brandImageView);
-//            brandName = itemView.findViewById(R.id.brandNameTextView);
-//            brandProduct = itemView.findViewById(R.id.brandProductTextView);
+            brandName = itemView.findViewById(R.id.brandNameTextView);
+            brandProduct = itemView.findViewById(R.id.brandProductTextView);
 //            viewRecordButton = itemView.findViewById(R.id.viewRecordButton);
 //            deleteRecordButton = itemView.findViewById(R.id.deleteRecordButton);
         }

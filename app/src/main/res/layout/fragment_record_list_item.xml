@@ -15,79 +15,90 @@
             android:id="@+id/recordBrandImageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:padding="2dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="7dp"
             android:background="@color/cardview_dark_background"
-            android:src="@drawable/baseline_image_24"
-            />
+            android:padding="2dp"
+            android:src="@drawable/baseline_image_24" />
 
         <TextView
             android:id="@+id/recordBrandNameTextView"
-            android:layout_width="130dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@id/recordBrandImageView"
+            android:ellipsize="end"
+            android:maxWidth="120dp"
+            android:maxLines="1"
             android:text="Brand"
-            android:maxWidth="200dp"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/recordProductNameTextView"
-            android:layout_width="130dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/recordBrandNameTextView"
             android:layout_toEndOf="@id/recordBrandImageView"
-            android:text="Product"
-            android:maxWidth="200dp"
-            android:textSize="15sp"
+            android:ellipsize="end"
+            android:maxWidth="120dp"
             android:maxLines="1"
-            android:ellipsize="end" />
+            android:text="Product"
+            android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/fromTextView"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@id/recordBrandNameTextView"
-            android:layout_marginTop="10dp"
-            android:text="From"
-            android:textSize="10sp" />
-
-
-        <TextView
-            android:id="@+id/locationTextView"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fromTextView"
-            android:layout_toEndOf="@id/recordBrandNameTextView"
-            android:text="Location"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/pricePerUomLabelTextView"
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@id/locationTextView"
-            android:layout_marginTop="10dp"
-            android:text="Price/Unit"
-            android:textSize="10sp" />
+            android:layout_toRightOf="@id/recordBrandNameTextView"
+            android:progressTint="@color/rating"
+            android:layout_marginTop="3dp"
+            android:rating="4" />
 
+
+        <LinearLayout
+            android:id="@+id/iconsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ratingBar"
+            android:layout_toRightOf="@id/recordBrandNameTextView"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/purchaseIconImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/purchase_icon_resized" />
+
+            <ImageView
+                android:id="@+id/locationIconImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_location_on_24" />
+
+            <ImageView
+                android:id="@+id/linkIconImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_link_24" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/pricePerUomValueTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/pricePerUomLabelTextView"
-            android:layout_toEndOf="@id/locationTextView"
-            android:text="5.00 per kg"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/border_text_view"
+            android:padding="7dp"
+            android:text="0.5 per kg"
+            android:textColor="@color/red"
+            android:textSize="15sp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

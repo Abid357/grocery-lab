@@ -5,4 +5,6 @@
     <color name="splashScreen">#2D7282</color>
     <color name="deleteButton">#CC4C4C</color>
     <color name="viewButton">#4C70CC</color>
+    <color name="red">#D50000</color>
+    <color name="rating">#FFD600</color>
 </resources>

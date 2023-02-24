@@ -73,6 +73,21 @@ public class Record {
      */
     private final Date creationDate;
 
+    /**
+     * URL of the product from the product store, if any.
+     */
+    private String link;
+
+    /**
+     * Remarks and notes on a record.
+     */
+    private String note;
+
+    /**
+     * Rating of a product out of 5.
+     */
+    private double rating;
+
     public Record(String productName, String brandName, double measure, int packageQuantity, int quantity, double price, double pricePerUom) {
         this.productName = productName;
         this.brandName = brandName;
@@ -164,5 +179,26 @@ public class Record {
 
     public Date getCreationDate() {
         return creationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "productName='" + productName + '\'' +
+                ", brandName='" + brandName + '\'' +
+                ", isPurchase=" + isPurchase +
+                ", location='" + location + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", measure=" + measure +
+                ", isPackaged=" + isPackaged +
+                ", packageQuantity=" + packageQuantity +
+                ", pricePerUom=" + pricePerUom +
+                ", purchaseDate=" + purchaseDate +
+                ", creationDate=" + creationDate +
+                ", link='" + link + '\'' +
+                ", note='" + note + '\'' +
+                ", rating=" + rating +
+                '}';
     }
 }
