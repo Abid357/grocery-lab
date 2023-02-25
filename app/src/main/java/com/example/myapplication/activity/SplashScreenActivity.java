@@ -2,6 +2,7 @@ package com.example.myapplication.activity;
 
 import android.animation.Animator;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -13,6 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.example.myapplication.core.BackgroundTask;
+import com.example.myapplication.core.Database;
+
+import java.util.concurrent.ExecutionException;
 
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -90,5 +95,22 @@ public class SplashScreenActivity extends AppCompatActivity {
                         });
             }
         });
+
+        try {
+            new BackgroundTask(this) {
+                @Override
+                public void doInBackground() {
+                    Database.withContext(getActivity()).getProductList();
+                    Database.withContext(getActivity()).getBrandList();
+                    Database.withContext(getActivity()).getRecordList();
+                }
+
+                @Override
+                public void onPostExecute() {
+                }
+            }.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -54,8 +54,7 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/recordBrandNameTextView"
             android:progressTint="@color/rating"
-            android:layout_marginTop="3dp"
-            android:rating="4" />
+            android:layout_marginTop="3dp" />
 
 
         <LinearLayout
@@ -88,13 +87,13 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/pricePerUomValueTextView"
+            android:id="@+id/perPriceTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="2dp"
-            android:background="@drawable/border_text_view"
+            android:background="@drawable/border_text_view_red"
             android:padding="7dp"
             android:text="0.5 per kg"
             android:textColor="@color/red"

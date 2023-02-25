@@ -31,6 +31,7 @@ public class RecordPurchaseFragment extends Fragment {
         dateEditText = view.findViewById(R.id.dateEditText);
         dateEditText.setOnClickListener(view1 -> showDatePicker());
         TextInputEditText locationEditText = view.findViewById(R.id.locationTextInput);
+        TextInputEditText linkEditText = view.findViewById(R.id.linkTextInput);
         SwitchMaterial purchaseSwitch = view.findViewById(R.id.purchaseSwitch);
         TextView switchTextView = view.findViewById(R.id.purchaseSwitchTextView);
         purchaseSwitch.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -48,10 +49,11 @@ public class RecordPurchaseFragment extends Fragment {
         backButton.setOnClickListener(view0 -> getActivity().onBackPressed());
 
         MaterialButton nextButton = view.findViewById(R.id.purchaseNextButton);
-        nextButton.setOnClickListener(view12 -> {
-            bundle.putBoolean("isPurchase", purchaseSwitch.isSelected());
+        nextButton.setOnClickListener(view0 -> {
+            bundle.putBoolean("isPurchase", purchaseSwitch.isChecked());
             bundle.putString("purchaseDate", dateEditText.getText().toString());
             bundle.putString("location", locationEditText.getText().toString());
+            bundle.putString("link", linkEditText.getText().toString());
             RecordQuantityFragment fragment = new RecordQuantityFragment();
             fragment.setArguments(bundle);
 

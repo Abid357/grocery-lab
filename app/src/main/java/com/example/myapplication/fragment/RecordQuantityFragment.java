@@ -27,7 +27,7 @@ public class RecordQuantityFragment extends Fragment {
     private TextInputEditText measureEditText, packageQuantityEditText, priceEditText, quantityEditText;
     private Product product;
     private SwitchMaterial packageSwitch;
-    private TextInputLayout packageQuantityInputLayout;
+    private TextInputLayout packageQuantityInputLayout, measureInputLayout;
 
 
     /**
@@ -74,7 +74,7 @@ public class RecordQuantityFragment extends Fragment {
         measureEditText.addTextChangedListener(new NumericTextWatcher(measureEditText, this));
         measureEditText.postDelayed(() -> measureEditText.setText(""), 200);
 
-        TextInputLayout measureInputLayout = view.findViewById(R.id.measureInputLayout);
+        measureInputLayout = view.findViewById(R.id.measureInputLayout);
         if (!isUnit())
             measureInputLayout.setSuffixText(product.getUom());
         else
@@ -120,9 +120,9 @@ public class RecordQuantityFragment extends Fragment {
 
         MaterialButton nextButton = view.findViewById(R.id.quantityNextButton);
         nextButton.setOnClickListener(view0 -> {
-            double totalPrice, measure = -1, perPrice;
-            int quantity, packageQuantity = -1;
-            if (measureEditText.getVisibility() == View.VISIBLE)
+            double totalPrice, measure = 0, perPrice;
+            int quantity, packageQuantity = 0;
+            if (measureInputLayout.getVisibility() == View.VISIBLE)
                 if (measureEditText.getError() != null) {
                     Toast.makeText(getContext(), "Errors in Measure field", Toast.LENGTH_SHORT).show();
                     return;
@@ -148,13 +148,21 @@ public class RecordQuantityFragment extends Fragment {
             perPriceString = perPriceString.substring(0, perPriceString.indexOf(" "));
             perPrice = Double.parseDouble(perPriceString);
 
-            Record record = new Record(productName, bundle.getString("brand"), measure, packageQuantity, quantity, totalPrice, perPrice);
-            record.setLocation(bundle.getString("location"));
-            record.setPurchaseDate(Utils.parseDate(bundle.getString("purchaseDate")));
-            record.setPurchase(bundle.getBoolean("isPurchase"));
-            if (Database.withContext(getContext()).addRecord(record)) {
-                getParentFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            }
+            bundle.putDouble("measure", measure);
+            bundle.putInt("packageQuantity", packageQuantity);
+            bundle.putInt("quantity", quantity);
+            bundle.putDouble("price", totalPrice);
+            bundle.putDouble("perPrice", perPrice);
+
+            RecordFeedbackFragment fragment = new RecordFeedbackFragment();
+            fragment.setArguments(bundle);
+
+            getParentFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                    .replace(R.id.mainFrameLayout, fragment)
+                    .setReorderingAllowed(true)
+                    .addToBackStack(null)
+                    .commit();
         });
         return view;
     }

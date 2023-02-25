@@ -1,18 +1,22 @@
 package com.example.myapplication.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.core.Database;
+import com.example.myapplication.core.Product;
 import com.example.myapplication.core.Record;
-import com.google.android.material.button.MaterialButton;
+import com.example.myapplication.core.Utils;
 
 import java.util.List;
 
@@ -34,9 +38,21 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
 
     @Override
     public void onBindViewHolder(RecordAdapter.RecordViewHolder holder, int position) {
-//        holder.brandName.setText(records.get(holder.getAdapterPosition()).getBrandName());
-//        holder.brandProduct.setText(records.get(holder.getAdapterPosition()).getProductName());
-        Log.i("okok", records.toString());
+        holder.brandName.setText(records.get(holder.getAdapterPosition()).getBrandName());
+        holder.productName.setText(records.get(holder.getAdapterPosition()).getProductName());
+        if (records.get(holder.getAdapterPosition()).isPurchase())
+            holder.purchaseIcon.setVisibility(View.VISIBLE);
+        else holder.purchaseIcon.setVisibility(View.GONE);
+        if (TextUtils.isEmpty(records.get(holder.getAdapterPosition()).getLocation()))
+            holder.locationIcon.setVisibility(View.GONE);
+        else holder.locationIcon.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(records.get(holder.getAdapterPosition()).getLink()))
+            holder.linkIcon.setVisibility(View.GONE);
+        else holder.linkIcon.setVisibility(View.VISIBLE);
+        holder.ratingBar.setRating((float) records.get(holder.getAdapterPosition()).getRating());
+        double perPrice = records.get(holder.getAdapterPosition()).getPricePerUom();
+        Product product = Database.withContext(context).getProductByName(records.get(holder.getAdapterPosition()).getProductName());
+        holder.perPrice.setText(Utils.formatDecimal(perPrice) + " per " + product.getUom());
     }
 
     @Override
@@ -45,17 +61,19 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
     }
 
     public class RecordViewHolder extends RecyclerView.ViewHolder {
-        ImageView brandImage;
-        TextView brandName, brandProduct;
-        MaterialButton viewRecordButton, deleteRecordButton;
+        ImageView purchaseIcon, locationIcon, linkIcon;
+        TextView brandName, productName, perPrice;
+        RatingBar ratingBar;
 
         public RecordViewHolder(View itemView) {
             super(itemView);
-//            brandImage = itemView.findViewById(R.id.brandImageView);
-            brandName = itemView.findViewById(R.id.brandNameTextView);
-            brandProduct = itemView.findViewById(R.id.brandProductTextView);
-//            viewRecordButton = itemView.findViewById(R.id.viewRecordButton);
-//            deleteRecordButton = itemView.findViewById(R.id.deleteRecordButton);
+            brandName = itemView.findViewById(R.id.recordBrandNameTextView);
+            productName = itemView.findViewById(R.id.recordProductNameTextView);
+            purchaseIcon = itemView.findViewById(R.id.purchaseIconImageView);
+            locationIcon = itemView.findViewById(R.id.locationIconImageView);
+            linkIcon = itemView.findViewById(R.id.linkIconImageView);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
+            perPrice = itemView.findViewById(R.id.perPriceTextView);
         }
     }
 }

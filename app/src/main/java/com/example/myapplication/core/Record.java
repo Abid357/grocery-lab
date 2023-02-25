@@ -86,18 +86,36 @@ public class Record {
     /**
      * Rating of a product out of 5.
      */
-    private double rating;
+    private float rating;
 
-    public Record(String productName, String brandName, double measure, int packageQuantity, int quantity, double price, double pricePerUom) {
+    public Record(String productName,
+                  String brandName,
+                  double measure,
+                  int packageQuantity,
+                  int quantity,
+                  double price,
+                  double pricePerUom,
+                  boolean isPurchase,
+                  Date purchaseDate,
+                  String location,
+                  String link,
+                  float rating,
+                  String note) {
         this.productName = productName;
         this.brandName = brandName;
         this.measure = measure;
         this.packageQuantity = packageQuantity;
-        if (packageQuantity != -1)
+        if (packageQuantity != 0)
             isPackaged = true;
         this.quantity = quantity;
         this.price = price;
         this.pricePerUom = pricePerUom;
+        this.isPurchase = isPurchase;
+        this.purchaseDate = purchaseDate;
+        this.location = location;
+        this.link = link;
+        this.rating = rating;
+        this.note = note;
         creationDate = new Date();
     }
 
@@ -179,6 +197,30 @@ public class Record {
 
     public Date getCreationDate() {
         return creationDate;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     @Override
