@@ -35,7 +35,7 @@ public class Record {
     /**
      * Quantity in units or the number of packages for the product.
      */
-    private double quantity;
+    private int quantity;
 
     /**
      * Applicable only if the product uses a unit of measure (UoM).
@@ -139,7 +139,7 @@ public class Record {
         return price;
     }
 
-    public double getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
@@ -167,7 +167,7 @@ public class Record {
         this.location = location;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

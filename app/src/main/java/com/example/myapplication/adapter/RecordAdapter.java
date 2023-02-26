@@ -2,7 +2,6 @@ package com.example.myapplication.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,16 +23,18 @@ import java.util.List;
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordViewHolder> {
     private List<Record> records;
     private final Context context;
+    private OnRecordClickListener listener;
 
-    public RecordAdapter(Context context, List<Record> records) {
+    public RecordAdapter(Context context, List<Record> records, OnRecordClickListener listener) {
         this.context = context;
         this.records = records;
+        this.listener = listener;
     }
 
     @Override
     public RecordAdapter.RecordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.fragment_record_list_item, parent, false);
-        return new RecordViewHolder(view);
+        return new RecordViewHolder(view, listener);
     }
 
     @Override
@@ -60,12 +61,13 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         return records.size();
     }
 
-    public class RecordViewHolder extends RecyclerView.ViewHolder {
+    public class RecordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView purchaseIcon, locationIcon, linkIcon;
         TextView brandName, productName, perPrice;
         RatingBar ratingBar;
+        OnRecordClickListener listener;
 
-        public RecordViewHolder(View itemView) {
+        public RecordViewHolder(View itemView, OnRecordClickListener listener) {
             super(itemView);
             brandName = itemView.findViewById(R.id.recordBrandNameTextView);
             productName = itemView.findViewById(R.id.recordProductNameTextView);
@@ -74,6 +76,17 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
             linkIcon = itemView.findViewById(R.id.linkIconImageView);
             ratingBar = itemView.findViewById(R.id.ratingBar);
             perPrice = itemView.findViewById(R.id.perPriceTextView);
+            this.listener = listener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            listener.onRecordClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnRecordClickListener {
+        void onRecordClick(int position);
     }
 }

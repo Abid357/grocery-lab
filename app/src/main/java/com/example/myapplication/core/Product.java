@@ -3,7 +3,6 @@ package com.example.myapplication.core;
 public class Product {
     private String name;
     private String uom;
-
     private int brandCount;
 
     public Product(String name, String uom) {

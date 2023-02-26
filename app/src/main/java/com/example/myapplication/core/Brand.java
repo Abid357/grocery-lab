@@ -3,14 +3,12 @@ package com.example.myapplication.core;
 import java.util.Date;
 
 public class Brand {
-    private String name;
-    private String productName;
+    private final String name;
+    private final String productName;
     private String imagePath;
     private double lastPurchasePrice;
     private String lastPurchaseLocation;
-
     private int recordCount;
-
     private Date lastPurchaseDate;
 
     public Brand(String name, String productName) {

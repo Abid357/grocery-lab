@@ -7,4 +7,6 @@
     <color name="viewButton">#4C70CC</color>
     <color name="red">#D50000</color>
     <color name="rating">#FFD600</color>
+    <color name="grey">#535353</color>
+    <color name="light_grey">#BFBFBF</color>
 </resources>

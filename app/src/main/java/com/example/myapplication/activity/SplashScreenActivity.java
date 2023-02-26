@@ -2,7 +2,6 @@ package com.example.myapplication.activity;
 
 import android.animation.Animator;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -16,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.core.BackgroundTask;
 import com.example.myapplication.core.Database;
-
-import java.util.concurrent.ExecutionException;
 
 
 public class SplashScreenActivity extends AppCompatActivity {

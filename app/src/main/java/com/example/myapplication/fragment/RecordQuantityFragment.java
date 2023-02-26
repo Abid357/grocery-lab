@@ -8,13 +8,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.myapplication.R;
 import com.example.myapplication.core.Database;
 import com.example.myapplication.core.NumericTextWatcher;
 import com.example.myapplication.core.Product;
-import com.example.myapplication.core.Record;
 import com.example.myapplication.core.Utils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;

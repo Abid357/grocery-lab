@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.RatingBar;
 
 import androidx.fragment.app.Fragment;
@@ -19,7 +17,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Date;
-import java.util.List;
 
 public class RecordFeedbackFragment extends Fragment {
     @Override
