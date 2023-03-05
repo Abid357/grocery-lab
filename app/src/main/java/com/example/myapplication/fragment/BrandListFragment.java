@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,9 +46,17 @@ public class BrandListFragment extends Fragment {
             }
         });
 
+        ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Database.BRAND_INSERTED) {
+                        adapter.notifyItemInserted(0);
+                    }
+                });
+
         addBrandButton.setOnClickListener(listener -> {
             Intent intent = new Intent(getContext(), BrandFormActivity.class);
-            startActivity(intent);
+            activityResultLaunch.launch(intent);
         });
         return view;
     }

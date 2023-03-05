@@ -22,6 +22,17 @@ import com.google.android.material.button.MaterialButton;
 import java.util.List;
 
 public class ProductListFragment extends Fragment {
+    AutoCompleteTextView uomAutoComplete;
+    ArrayAdapter<String> uomAdapter;
+
+    private boolean validateUom() {
+        String uom = uomAutoComplete.getText().toString();
+        for (int i = 0; i < uomAdapter.getCount(); i++) {
+            if (uomAdapter.getItem(i).equals(uom))
+                return true;
+        }
+        return false;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,19 +49,27 @@ public class ProductListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<String> uomList = Database.withContext(getContext()).getUomList();
-        AutoCompleteTextView uomAutoComplete = view.findViewById(R.id.uomAutoCompleteTextView);
-        ArrayAdapter<String> uomAdapter = new ArrayAdapter<>(getContext(), R.layout.product_auto_complete_text_view, uomList);
+        uomAutoComplete = view.findViewById(R.id.uomAutoCompleteTextView);
+        uomAdapter = new ArrayAdapter<>(getContext(), R.layout.product_auto_complete_text_view, uomList);
         uomAutoComplete.setAdapter(uomAdapter);
+        uomAutoComplete.setOnFocusChangeListener((view0, b) -> {
+            if (!b && validateUom()) return;
+            uomAutoComplete.setText("");
+        });
 
         addProductButton.setOnClickListener(listener -> {
             String productName = productNameEditText.getText().toString().trim();
-            if (productName.isEmpty()){
+            if (productName.isEmpty()) {
                 Toast.makeText(getContext(), "Enter a product name.", Toast.LENGTH_SHORT).show();
                 return;
             }
             String uom = uomAutoComplete.getEditableText().toString();
             if (uom.isEmpty()) {
                 Toast.makeText(getContext(), "Select a unit of measure.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (!validateUom()) {
+                Toast.makeText(getContext(), "You cannot add a new unit of measure.", Toast.LENGTH_SHORT).show();
                 return;
             }
             Product product = new Product(productName, uom);

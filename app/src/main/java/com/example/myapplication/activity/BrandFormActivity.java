@@ -1,6 +1,5 @@
 package com.example.myapplication.activity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -31,11 +30,25 @@ public class BrandFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_brand_form);
 
         List<String> productStringList = Database.withContext(this).getProductStringList();
+        brandNameText = findViewById(R.id.brandNameEditText);
         brandProductAutoComplete = findViewById(R.id.brandProductAutoCompleteTextView);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.product_auto_complete_text_view, productStringList);
         brandProductAutoComplete.setAdapter(adapter);
+        brandProductAutoComplete.setOnFocusChangeListener((view, b) -> {
+            if (!b) {
+                String productName = brandProductAutoComplete.getText().toString();
+                for (int i = 0; i < adapter.getCount(); i++) {
+                    if (adapter.getItem(i).equals(productName))
+                        return;
+                }
+                brandProductAutoComplete.setText("");
+            }
+        });
 
-        brandNameText = findViewById(R.id.brandNameEditText);
+        brandProductAutoComplete.setOnItemClickListener((adapterView, view0, i, l) -> {
+            brandNameText.requestFocusFromTouch();
+        });
+
         productImageButton = findViewById(R.id.addProductImageButton);
         productImageView = findViewById(R.id.productImageView);
         saveButton = findViewById(R.id.saveProductButton);
@@ -52,10 +65,7 @@ public class BrandFormActivity extends AppCompatActivity {
             }
             Brand brand = new Brand(brandName, productName);
             if (Database.withContext(this).addBrand(brand)) {
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("fragment", R.id.brandsMenu);
-                startActivity(intent);
-                finishActivity(Database.INSERT);
+                setResult(Database.BRAND_INSERTED);
                 finish();
             }
         });

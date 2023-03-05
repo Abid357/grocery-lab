@@ -8,7 +8,6 @@ public class Brand {
     private String imagePath;
     private double lastPurchasePrice;
     private String lastPurchaseLocation;
-    private int recordCount;
     private Date lastPurchaseDate;
 
     public Brand(String name, String productName) {
@@ -54,13 +53,5 @@ public class Brand {
 
     public void setLastPurchaseDate(Date lastPurchaseDate) {
         this.lastPurchaseDate = lastPurchaseDate;
-    }
-
-    public int getRecordCount() {
-        return recordCount;
-    }
-
-    public void setRecordCount(int recordCount) {
-        this.recordCount = recordCount;
     }
 }

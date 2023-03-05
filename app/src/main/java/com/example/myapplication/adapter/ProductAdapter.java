@@ -35,7 +35,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(ProductAdapter.ProductViewHolder holder, int position) {
         holder.productName.setText(productList.get(holder.getAdapterPosition()).getName());
         holder.uom.setText(productList.get(holder.getAdapterPosition()).getUom());
-        holder.brandCount.setText(Integer.toString(productList.get(holder.getAdapterPosition()).getBrandCount()));
+        holder.brandCount.setText(Integer.toString(Database.withContext(context).getBrandCount(productList.get(holder.getAdapterPosition()).getName())));
         holder.deleteProductButton.setOnClickListener(v -> {
             Database.withContext(context).deleteProduct(holder.getAdapterPosition());
             notifyItemRemoved(holder.getAdapterPosition());

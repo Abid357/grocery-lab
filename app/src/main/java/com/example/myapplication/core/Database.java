@@ -15,15 +15,15 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Database {
     private static final String PRODUCT_TAG = "products";
     private static final String BRAND_TAG = "brands";
     private static final String RECORD_TAG = "records";
-    public static final int INSERT = 1;
-    public static final int EDIT = 2;
-    public static final int DELETE = 3;
+    public static final int BRAND_INSERTED = 1;
     private static Database instance;
     private Context context;
     private SharedPreferences sharedPreferences;
@@ -31,6 +31,8 @@ public class Database {
     private List<Brand> brandList;
     private final List<String> uomList;
     private List<Record> recordList;
+    private Map<String, Integer> brandCounts;
+    private Map<String, Integer> recordCounts;
 
     private Database(Context context) {
         this.context = context;
@@ -39,6 +41,8 @@ public class Database {
         brandList = new ArrayList<>();
         uomList = new ArrayList<>();
         recordList = new ArrayList<>();
+        brandCounts = new HashMap<>();
+        recordCounts = new HashMap<>();
     }
 
     public static Database withContext(Context context) {
@@ -84,25 +88,21 @@ public class Database {
     }
 
     private void updateRecordCount(String productName, String brandName, boolean increment) {
-        for (Brand b : brandList)
-            if (b.getName().equals(brandName) && b.getProductName().equals(productName)) {
-                int count = b.getRecordCount();
-                if (increment) count++;
-                else count--;
-                b.setRecordCount(Math.max(count, 0));
-                return;
-            }
+        String key = productName + "|" + brandName;
+        recordCounts.merge(key, 1, (a, b) -> increment ? a + b : a - b);
+    }
+
+    public int getRecordCount(String productName, String brandName) {
+        String key = productName + "|" + brandName;
+        return recordCounts.getOrDefault(key, 0);
     }
 
     private void updateBrandCount(String productName, boolean increment) {
-        for (Product p : productList)
-            if (p.getName().equals(productName)) {
-                int count = p.getBrandCount();
-                if (increment) count++;
-                else count--;
-                p.setBrandCount(Math.max(count, 0));
-                return;
-            }
+        brandCounts.merge(productName, 1, (a, b) -> increment ? a + b : a - b);
+    }
+
+    public int getBrandCount(String productName) {
+        return brandCounts.getOrDefault(productName, 0);
     }
 
     public boolean addBrand(Brand brand) {
@@ -131,7 +131,12 @@ public class Database {
     }
 
     public void deleteBrand(int position) {
-        Brand brand = brandList.remove(position);
+        Brand brand = brandList.get(position);
+        if (getRecordCount(brand.getProductName(), brand.getName()) != 0) {
+            Toast.makeText(context, "Delete all records first.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        brand = brandList.remove(position);
         updateBrandCount(brand.getProductName(), false);
         JSONArray jsonArray = new JSONArray();
         Gson gson = new Gson();
@@ -157,6 +162,8 @@ public class Database {
             }.getType();
             recordList = gson.fromJson(jsonData, type);
         }
+        for (Record record : recordList)
+            updateRecordCount(record.getProductName(), record.getBrandName(), true);
         return recordList;
     }
 
@@ -170,6 +177,8 @@ public class Database {
             }.getType();
             brandList = gson.fromJson(jsonData, type);
         }
+        for (Brand brand : brandList)
+            updateBrandCount(brand.getProductName(), true);
         return brandList;
     }
 
@@ -204,6 +213,10 @@ public class Database {
     }
 
     public void deleteProduct(int position) {
+        if (getBrandCount(productList.get(position).getName()) != 0) {
+            Toast.makeText(context, "Delete all brands first.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         productList.remove(position);
         JSONArray jsonArray = new JSONArray();
         Gson gson = new Gson();

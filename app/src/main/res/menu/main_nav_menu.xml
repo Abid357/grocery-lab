@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/homeMenu"
         android:icon="@drawable/baseline_home_24"
+        app:showAsAction="always"
         android:title="Home" />
     <item
         android:id="@+id/productsMenu"
         android:icon="@drawable/baseline_category_24"
+        app:showAsAction="always"
         android:title="Products" />
     <item
         android:id="@+id/brandsMenu"
         android:icon="@drawable/brand"
+        app:showAsAction="always"
         android:title="Brands" />
     <item
         android:id="@+id/recordsMenu"
         android:icon="@drawable/baseline_scatter_plot_24"
+        app:showAsAction="always"
         android:title="Records" />
 </menu>
