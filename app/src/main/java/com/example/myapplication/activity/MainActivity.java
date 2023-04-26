@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 import com.example.myapplication.fragment.BrandListFragment;
+import com.example.myapplication.fragment.DashboardFragment;
 import com.example.myapplication.fragment.ProductListFragment;
 import com.example.myapplication.fragment.RecordListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView mainNavigation = findViewById(R.id.mainBottomNavigationView);
         mainNavigation.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
+                case R.id.homeMenu:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainFrameLayout, new DashboardFragment()).commit();
+                    return true;
                 case R.id.productsMenu:
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainFrameLayout, new ProductListFragment()).commit();
                     return true;
