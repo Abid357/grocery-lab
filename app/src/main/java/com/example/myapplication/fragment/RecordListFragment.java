@@ -50,6 +50,8 @@ public class RecordListFragment extends Fragment implements RecordAdapter.OnReco
             }
         });
 
+        adapter.setUpItemTouchHelper(recyclerView);
+
         addRecordButton.setOnClickListener(listener -> getParentFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
                 .replace(R.id.mainFrameLayout, new RecordProductFragment())

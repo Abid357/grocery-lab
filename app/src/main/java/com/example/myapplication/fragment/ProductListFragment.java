@@ -57,6 +57,8 @@ public class ProductListFragment extends Fragment {
             uomAutoComplete.setText("");
         });
 
+        productAdapter.setUpItemTouchHelper(recyclerView);
+
         addProductButton.setOnClickListener(listener -> {
             String productName = productNameEditText.getText().toString().trim();
             if (productName.isEmpty()) {

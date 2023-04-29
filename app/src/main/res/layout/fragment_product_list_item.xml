@@ -13,9 +13,10 @@
 
         <TextView
             android:id="@+id/productNameTextView"
-            android:layout_width="225dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/uomValueTextView"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Product"
@@ -53,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginRight="20dp"
-            android:layout_toStartOf="@id/deleteProductButton"
+            android:layout_alignParentEnd="true"
             android:text="Brands"
             android:textAlignment="center"
             android:textSize="10sp" />
@@ -64,27 +65,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/brandCountLabelTextView"
             android:layout_marginRight="20dp"
-            android:layout_toStartOf="@id/deleteProductButton"
+            android:layout_alignParentEnd="true"
             android:maxLines="1"
             android:text="0"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="14sp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/deleteProductButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/deleteButton"
-            android:contentDescription="Delete product"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            app:icon="@drawable/baseline_delete_24"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconSize="20dp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

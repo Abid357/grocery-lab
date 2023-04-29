@@ -46,6 +46,8 @@ public class BrandListFragment extends Fragment {
             }
         });
 
+        adapter.setUpItemTouchHelper(recyclerView);
+
         ActivityResultLauncher<Intent> activityResultLaunch = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {

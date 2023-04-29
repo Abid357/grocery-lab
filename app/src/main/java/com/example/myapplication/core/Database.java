@@ -130,11 +130,11 @@ public class Database {
         }
     }
 
-    public void deleteBrand(int position) {
+    public boolean deleteBrand(int position) {
         Brand brand = brandList.get(position);
         if (getRecordCount(brand.getProductName(), brand.getName()) != 0) {
             Toast.makeText(context, "Delete all records first.", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
         brand = brandList.remove(position);
         updateBrandCount(brand.getProductName(), false);
@@ -147,8 +147,10 @@ public class Database {
             editor.putString(BRAND_TAG, jsonArray.toString());
             editor.apply();
             Toast.makeText(context, "Brand deleted.", Toast.LENGTH_SHORT).show();
+            return true;
         } catch (JSONException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -212,10 +214,10 @@ public class Database {
         }
     }
 
-    public void deleteProduct(int position) {
+    public boolean deleteProduct(int position) {
         if (getBrandCount(productList.get(position).getName()) != 0) {
             Toast.makeText(context, "Delete all brands first.", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
         productList.remove(position);
         JSONArray jsonArray = new JSONArray();
@@ -227,8 +229,10 @@ public class Database {
             editor.putString(PRODUCT_TAG, jsonArray.toString());
             editor.apply();
             Toast.makeText(context, "Product deleted.", Toast.LENGTH_SHORT).show();
+            return true;
         } catch (JSONException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

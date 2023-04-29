@@ -52,26 +52,28 @@ public class DashboardFragment extends Fragment {
                 .filter(Record::isPurchase)
                 .min(Comparator.comparing(Record::getPurchaseDate, Comparator.nullsLast(Comparator.naturalOrder())))
                 .orElse(null);
+        CardView lastPurchaseCardView = view.findViewById(R.id.lastPurchaseCardView);
+        View lastPurchaseView = inflater.inflate(R.layout.fragment_record_list_no_item, null);
         if (lastPurchaseRecord != null) {
-            View lastPurchaseView = inflater.inflate(R.layout.fragment_record_list_item, null);
+            lastPurchaseView = inflater.inflate(R.layout.fragment_record_list_item, null);
             populateCardView(lastPurchaseView, lastPurchaseRecord);
-            CardView lastPurchaseCardView = view.findViewById(R.id.lastPurchaseCardView);
-            lastPurchaseCardView.addView(lastPurchaseView);
             lastPurchaseCardView.setOnClickListener(new OnCardViewClickListener(lastPurchaseRecord, getContext()));
         }
+        lastPurchaseCardView.addView(lastPurchaseView);
 
         // Best Purchase
         Record bestPurchaseRecord = Database.withContext(getContext()).getRecordList().stream()
                 .filter(Record::isPurchase)
                 .min(Comparator.comparing(Record::getPricePerUom, Comparator.nullsLast(Comparator.naturalOrder())))
                 .orElse(null);
+        CardView bestPurchaseCardView = view.findViewById(R.id.bestPurchaseCardView);
+        View bestPurchaseView = inflater.inflate(R.layout.fragment_record_list_no_item, null);
         if (bestPurchaseRecord != null) {
-            View bestPurchaseView = inflater.inflate(R.layout.fragment_record_list_item, null);
+            bestPurchaseView = inflater.inflate(R.layout.fragment_record_list_item, null);
             populateCardView(bestPurchaseView, bestPurchaseRecord);
-            CardView bestPurchaseCardView = view.findViewById(R.id.bestPurchaseCardView);
-            bestPurchaseCardView.addView(bestPurchaseView);
             bestPurchaseCardView.setOnClickListener(new OnCardViewClickListener(bestPurchaseRecord, getContext()));
         }
+        bestPurchaseCardView.addView(bestPurchaseView);
 
         return view;
     }

@@ -1,6 +1,9 @@
 package com.example.myapplication.adapter;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
@@ -61,7 +67,60 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         return records.size();
     }
 
-    public class RecordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public void setUpItemTouchHelper(RecyclerView recyclerView) {
+        ItemTouchHelper.SimpleCallback simpleCallback =
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView,
+                                          @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        Database.withContext(context).deleteRecord(position);
+                        notifyItemRemoved(position);
+                    }
+
+                    @Override
+                    public void onChildDraw(Canvas c, RecyclerView recyclerView,
+                                            RecyclerView.ViewHolder viewHolder, float dX, float dY,
+                                            int actionState, boolean isCurrentlyActive) {
+                        View itemView = viewHolder.itemView;
+                        Drawable deleteIcon = ResourcesCompat.getDrawable(context.getResources(), R.drawable.baseline_delete_24, null);
+                        int backgroundCornerOffset = 20;
+                        int iconMargin = (itemView.getHeight() - deleteIcon.getIntrinsicHeight()) / 2;
+                        int iconTop = itemView.getTop() + (itemView.getHeight() - deleteIcon.getIntrinsicHeight()) / 2;
+                        int iconBottom = iconTop + deleteIcon.getIntrinsicHeight();
+                        ColorDrawable background = new ColorDrawable(context.getResources().getColor(R.color.deleteButton, null));
+                        if (dX > 0) { // swiping to the right
+                            int iconLeft = itemView.getLeft() + iconMargin;
+                            int iconRight = itemView.getLeft() + iconMargin + deleteIcon.getIntrinsicWidth();
+                            deleteIcon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+
+                            background.setBounds(itemView.getLeft(), itemView.getTop(),
+                                    itemView.getLeft() + ((int) dX) + backgroundCornerOffset,
+                                    itemView.getBottom());
+                        } else { // not swiping
+                            background.setBounds(0, 0, 0, 0);
+                        }
+
+                        background.draw(c);
+                        deleteIcon.draw(c);
+
+                        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                    }
+                };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+
+    public interface OnRecordClickListener {
+        void onRecordClick(int position);
+    }
+
+    public class RecordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView purchaseIcon, locationIcon, linkIcon;
         TextView brandName, productName, perPrice;
         RatingBar ratingBar;
@@ -84,9 +143,5 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         public void onClick(View view) {
             listener.onRecordClick(getAdapterPosition());
         }
-    }
-
-    public interface OnRecordClickListener {
-        void onRecordClick(int position);
     }
 }

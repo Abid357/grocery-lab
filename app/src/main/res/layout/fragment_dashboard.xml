@@ -172,4 +172,26 @@
         android:elevation="8dp"
         app:cardCornerRadius="4dp" />
 
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/compareCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bestPurchaseCardView"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:elevation="8dp"
+        app:cardCornerRadius="4dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Compare Records"
+            android:textAlignment="center"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
+
 </RelativeLayout>
