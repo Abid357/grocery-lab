@@ -22,6 +22,7 @@ import com.example.myapplication.core.Database;
 import com.example.myapplication.core.Product;
 import com.example.myapplication.core.Record;
 import com.example.myapplication.core.Utils;
+import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -74,6 +75,18 @@ public class DashboardFragment extends Fragment {
             bestPurchaseCardView.setOnClickListener(new OnCardViewClickListener(bestPurchaseRecord, getContext()));
         }
         bestPurchaseCardView.addView(bestPurchaseView);
+
+        MaterialButton compareButton = view.findViewById(R.id.compareButton);
+        compareButton.setOnClickListener(view1 -> {
+            FilteredRecordListFragment fragment = new FilteredRecordListFragment();
+
+            getParentFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right, R.anim.slide_in_right, R.anim.slide_out_left)
+                    .replace(R.id.mainFrameLayout, fragment)
+                    .setReorderingAllowed(true)
+                    .addToBackStack(null)
+                    .commit();
+        });
 
         return view;
     }

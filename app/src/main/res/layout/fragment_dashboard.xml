@@ -27,7 +27,6 @@
                 android:layout_height="match_parent"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
-                android:text="25"
                 android:textAlignment="center"
                 android:textColor="@color/grey"
                 android:textSize="35sp" />
@@ -49,7 +48,6 @@
                 android:layout_height="match_parent"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
-                android:text="25"
                 android:textAlignment="center"
                 android:textColor="@color/grey"
                 android:textSize="35sp" />
@@ -70,7 +68,6 @@
                 android:layout_height="match_parent"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
-                android:text="25"
                 android:textAlignment="center"
                 android:textColor="@color/grey"
                 android:textSize="35sp" />
@@ -183,10 +180,11 @@
         android:elevation="8dp"
         app:cardCornerRadius="4dp">
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:id="@+id/compareButton"
+            android:padding="5dp"
             android:text="Compare Records"
             android:textAlignment="center"
             android:background="@color/splashScreen"
