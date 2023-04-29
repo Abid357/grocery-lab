@@ -189,7 +189,8 @@
             android:padding="10dp"
             android:text="Compare Records"
             android:textAlignment="center"
-            android:textColor="@color/grey"
+            android:background="@color/splashScreen"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
     </androidx.cardview.widget.CardView>
