@@ -3,6 +3,7 @@ package com.example.myapplication.fragment;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,78 +64,38 @@ public class FilteredRecordListFragment extends Fragment implements RecordAdapte
             updateView(false);
         });
 
-        List<String> brandStringList = Database.withContext(getContext()).getBrandStringList(null);
+        List<String> brandStringList = new ArrayList<>();
         AutoCompleteTextView brandAutoComplete = view.findViewById(R.id.brandAutoComplete);
         ArrayAdapter<String> brandAdapter = new ArrayAdapter<>(getContext(), R.layout.product_auto_complete_text_view, brandStringList);
+        brandAutoComplete.setAdapter(brandAdapter);
+        brandAutoComplete.setOnItemClickListener((adapterView, view12, i, l) -> {
+            filterByBrand = brandAutoComplete.getText().toString();
+            updateView(true);
+        });
 
+        final Handler handler = new Handler();
         List<String> productStringList = Database.withContext(getContext()).getProductStringList();
         AutoCompleteTextView productAutoComplete = view.findViewById(R.id.productAutoComplete);
         ArrayAdapter<String> productAdapter = new ArrayAdapter<>(getContext(), R.layout.product_auto_complete_text_view, productStringList);
         productAutoComplete.setAdapter(productAdapter);
-        productAutoComplete.setOnFocusChangeListener((view1, b) -> {
-            if (!b) {
-                String productName = productAutoComplete.getText().toString();
-                for (int i = 0; i < productAdapter.getCount(); i++) {
-                    if (productAdapter.getItem(i).equals(productName)) {
-                        filterByProduct = productName;
-                        brandStringList.addAll(Database.withContext(getContext()).getBrandStringList(productName));
-                        brandAdapter.notifyDataSetChanged();
-                        updateView(true);
-                        return;
-                    }
-                }
-                productAutoComplete.setText("");
-                brandStringList.clear();
-                filterByProduct = "";
-                updateView(true);
-            }
-        });
         productAutoComplete.setOnItemClickListener((adapterView, view12, i, l) -> {
-            String productName = productAutoComplete.getText().toString();
-            filterByProduct = productName;
-            updateView(true);
-        });
-
-
-        brandAutoComplete.setAdapter(brandAdapter);
-        brandAutoComplete.setOnFocusChangeListener((view1, b) -> {
-            if (!b) {
-                String brandName = brandAutoComplete.getText().toString();
-                for (int i = 0; i < brandAdapter.getCount(); i++) {
-                    if (brandAdapter.getItem(i).equals(brandName)) {
-                        filterByBrand = brandName;
-                        updateView(true);
-                        return;
-                    }
-                }
-                brandAutoComplete.setText("");
-                filterByBrand = "";
+            filterByProduct = productAutoComplete.getText().toString();
+            filterByBrand = "";
+            brandAutoComplete.setText("");
+            brandAdapter.clear();
+            brandAdapter.addAll(Database.withContext(getContext()).getBrandStringList(filterByProduct));
+            handler.postDelayed(() -> {
+                brandAdapter.notifyDataSetChanged();
                 updateView(true);
-            }
-        });
-        brandAutoComplete.setOnItemClickListener((adapterView, view12, i, l) -> {
-            String brandName = brandAutoComplete.getText().toString();
-            filterByBrand = brandName;
-            updateView(true);
+            }, 200);
         });
 
-        CardView filtersCardView = view.findViewById(R.id.filtersCardView);
         RecyclerView recyclerView = view.findViewById(R.id.filteredRecordsRecyclerView);
         recordList = new ArrayList<>();
         recordList.addAll(Database.withContext(getContext()).getRecordList());
         adapter = new RecordAdapter(getContext(), recordList, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0)
-                    filtersCardView.setVisibility(View.INVISIBLE);
-                else
-                    filtersCardView.setVisibility(View.VISIBLE);
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
 
         sortBySwitch.setChecked(true);
         return view;
@@ -153,30 +112,28 @@ public class FilteredRecordListFragment extends Fragment implements RecordAdapte
                 recordList.removeIf(record -> !record.getBrandName().equals(filterByBrand));
         }
 
-        if (recordList.isEmpty())
-            return;
-
-        // sort
-        switch (sortBy) {
-            case SORT_BY_UNIT_PRICE:
-                recordList.sort((o1, o2) -> {
-                    int result = Double.compare(o1.getPricePerUom(), o2.getPricePerUom());
-                    if (result != 0) {
-                        return result;
-                    }
-                    return Double.compare(o2.getRating(), o1.getRating());
-                });
-                break;
-            case SORT_BY_RATING:
-                recordList.sort((o1, o2) -> {
-                    int result = Double.compare(o2.getRating(), o1.getRating());
-                    if (result != 0) {
-                        return result;
-                    }
-                    return Double.compare(o1.getPricePerUom(), o2.getPricePerUom());
-                });
-                break;
-        }
+        if (!recordList.isEmpty())
+            // sort
+            switch (sortBy) {
+                case SORT_BY_UNIT_PRICE:
+                    recordList.sort((o1, o2) -> {
+                        int result = Double.compare(o1.getPricePerUom(), o2.getPricePerUom());
+                        if (result != 0) {
+                            return result;
+                        }
+                        return Double.compare(o2.getRating(), o1.getRating());
+                    });
+                    break;
+                case SORT_BY_RATING:
+                    recordList.sort((o1, o2) -> {
+                        int result = Double.compare(o2.getRating(), o1.getRating());
+                        if (result != 0) {
+                            return result;
+                        }
+                        return Double.compare(o1.getPricePerUom(), o2.getPricePerUom());
+                    });
+                    break;
+            }
         adapter.notifyDataSetChanged();
     }
 
